@@ -1,22 +1,20 @@
 import React from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import './App.css';
+import ToolBar from './components/ToolBar';
+import Home from './components/Home'
+import Categories from './components/Categories'
+import Companies from './components/Companies'
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <ToolBar />
+        <Route exact path="/" component={Home} />
+        <Route path="/categories" component={Categories} />
+        <Route path="/companies" component={Companies} />
+      </Router>
     </div>
   );
 }
