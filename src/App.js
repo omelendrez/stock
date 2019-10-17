@@ -4,6 +4,9 @@ import './App.css';
 import ToolBar from './components/ToolBar';
 import Home from './components/Home'
 import Companies from './components/Companies'
+import Stores from './components/Stores'
+import Suppliers from './components/Suppliers'
+import Users from './components/Users'
 
 function App() {
   return (
@@ -12,6 +15,9 @@ function App() {
         <ToolBar />
         <Route exact path="/" component={Home} />
         <Route path="/companies" component={Companies} />
+        <Route path="/stores" component={Stores} />
+        <Route path="/suppliers" component={Suppliers} />
+        <Route path="/users" component={Users} />
       </Router>
     </div>
   );
