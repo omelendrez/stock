@@ -16,6 +16,15 @@ const ToolBar = props => (
           <li className="nav-item">
             <NavLink className="nav-link" to="/companies">Companies</NavLink>
           </li>
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/stores">Stores</NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/suppliers">Suppliers</NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/users">Users</NavLink>
+          </li>
         </ul>
       </div>
     </nav>
