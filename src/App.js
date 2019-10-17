@@ -7,6 +7,9 @@ import Companies from './components/Companies'
 import Categories from './components/Categories'
 import Customers from './components/Customers'
 import Products from './components/Products'
+import Stores from './components/Stores'
+import Suppliers from './components/Suppliers'
+import Users from './components/Users'
 
 function App() {
   return (
@@ -18,6 +21,9 @@ function App() {
         <Route path="/categories" component={Categories} />
         <Route path="/customers" component={Customers} />
         <Route path="/products" component={Products} />
+        <Route path="/stores" component={Stores} />
+        <Route path="/suppliers" component={Suppliers} />
+        <Route path="/users" component={Users} />
       </Router>
     </div>
   );
