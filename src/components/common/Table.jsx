@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import Header from './Header'
 
 const Table = ({ title, records }) => {
   const pagination = {
@@ -25,11 +26,11 @@ const Table = ({ title, records }) => {
 
   return (
     pageItems.length && <div className="table-responsive">
-      <div className="p-2 text-left text-white lead bg-info font-weight-normal">{title}</div>
+      <Header title={title} />
       <table className="table">
         <thead className="thead-light">
           <tr>
-            <Header record={pageItems[0]} />
+            <Headers record={pageItems[0]} />
           </tr>
         </thead>
         <tbody>
@@ -46,7 +47,7 @@ const Table = ({ title, records }) => {
   )
 }
 
-const Header = ({ record }) => Object.keys(record).map((field, index) => <th className="text-uppercase" key={index}>{field}</th>)
+const Headers = ({ record }) => Object.keys(record).map((field, index) => <th className="text-uppercase" key={index}>{field}</th>)
 
 const Body = ({ records }) => records.map((record, index) => (<tr key={index}><Row record={record} /></tr>))
 
