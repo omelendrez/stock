@@ -1,8 +1,20 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { getCompanies } from './../services/companies'
+import Table from './common/Table'
 
-const Companies = props => {
+const Companies = () => {
+    const [companies, setCompanies] = useState([])
+
+    useEffect(() => {
+        const companies = getCompanies()
+        setCompanies(companies)
+    }, [])
+
     return (
-        <div>Companies</div>
+        companies.length && <Table
+            title="Companies"
+            records={companies}
+        />
     )
 }
 
