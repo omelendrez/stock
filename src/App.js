@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import './App.css';
 import ToolBar from './components/common/ToolBar';
 import Home from './components/Home'
 import Companies from './components/Companies'
