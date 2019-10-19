@@ -18,12 +18,6 @@ const units = [
     company_id: '1 - Veterinaria Colitas Felices'
   },
   {
-    id: 4,
-    code: '04',
-    name: 'Shampoo',
-    company_id: '1 - Veterinaria Colitas Felices'
-  },
-  {
     id: 5,
     code: 'EA',
     name: 'Each',
