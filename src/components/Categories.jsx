@@ -1,9 +1,21 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { getCategories } from './../services/categories'
+import Table from './common/Table'
 
-const Categories = props => {
-  return (
-    <div>Categories</div>
-  )
+const Categories = () => {
+    const [categories, setCategories] = useState([])
+
+    useEffect(() => {
+        const categories = getCategories()
+        setCategories(categories)
+    }, [])
+
+    return (
+        categories.length && <Table
+            title="Categories"
+            records={categories}
+        />
+    )
 }
 
 export default Categories
