@@ -12,7 +12,7 @@ const Categories = () => {
 
     return (
         categories.length && <Table
-            title="categories"
+            title="Categories"
             records={categories}
         />
     )
