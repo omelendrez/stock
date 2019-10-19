@@ -1,8 +1,20 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { getStores } from './../services/stores'
+import Table from './common/Table'
 
-const Stores = props => {
+const Stores = () => {
+    const [stores, setStores] = useState([])
+
+    useEffect(() => {
+        const stores = getStores()
+        setStores(stores)
+    }, [])
+
     return (
-        <div>Stores</div>
+        stores.length && <Table
+            title="Stores"
+            records={stores}
+        />
     )
 }
 
