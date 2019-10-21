@@ -47,7 +47,7 @@ const Table = ({ title, records }) => {
   )
 }
 
-const Headers = ({ record }) => Object.keys(record).map((field, index) => <th className="text-uppercase" key={index}>{field}</th>)
+const Headers = ({ record }) => Object.keys(record).map((field, index) => <th className="text-uppercase" key={index}>{field.replace(/_/g, ' ')}</th >)
 
 const Body = ({ records }) => records.map((record, index) => (<tr key={index}><Row record={record} /></tr>))
 
