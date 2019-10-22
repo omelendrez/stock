@@ -3,19 +3,19 @@ import { getUsers } from './../services/users'
 import Table from './common/Table'
 
 const Users = () => {
-    const [users, setUsers] = useState([])
+  const [users, setUsers] = useState([])
 
-    useEffect(() => {
-        const users = getUsers()
-        setUsers(users)
-    }, [])
+  useEffect(() => {
+    const users = getUsers()
+    setUsers(users)
+  }, [])
 
-    return (
-        users.length && <Table
-            title="Users"
-            records={users}
-        />
-    )
+  return (
+    users.length && <Table
+      title="Users"
+      records={users}
+    />
+  )
 }
 
 export default Users

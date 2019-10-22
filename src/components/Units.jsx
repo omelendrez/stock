@@ -3,19 +3,19 @@ import { getUnits } from './../services/units'
 import Table from './common/Table'
 
 const Units = () => {
-    const [units, setUnits] = useState([])
+  const [units, setUnits] = useState([])
 
-    useEffect(() => {
-        const units = getUnits()
-        setUnits(units)
-    }, [])
+  useEffect(() => {
+    const units = getUnits()
+    setUnits(units)
+  }, [])
 
-    return (
-        units.length && <Table
-            title="Units"
-            records={units}
-        />
-    )
+  return (
+    units.length && <Table
+      title="Units"
+      records={units}
+    />
+  )
 }
 
 export default Units

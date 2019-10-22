@@ -3,19 +3,19 @@ import { getSuppliers } from './../services/suppliers'
 import Table from './common/Table'
 
 const Suppliers = () => {
-    const [suppliers, setSuppliers] = useState([])
+  const [suppliers, setSuppliers] = useState([])
 
-    useEffect(() => {
-        const suppliers = getSuppliers()
-        setSuppliers(suppliers)
-    }, [])
+  useEffect(() => {
+    const suppliers = getSuppliers()
+    setSuppliers(suppliers)
+  }, [])
 
-    return (
-        suppliers.length && <Table
-            title="Suppliers"
-            records={suppliers}
-        />
-    )
+  return (
+    suppliers.length && <Table
+      title="Suppliers"
+      records={suppliers}
+    />
+  )
 }
 
 export default Suppliers

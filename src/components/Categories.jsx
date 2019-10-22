@@ -3,19 +3,19 @@ import { getCategories } from './../services/categories'
 import Table from './common/Table'
 
 const Categories = () => {
-    const [categories, setCategories] = useState([])
+  const [categories, setCategories] = useState([])
 
-    useEffect(() => {
-        const categories = getCategories()
-        setCategories(categories)
-    }, [])
+  useEffect(() => {
+    const categories = getCategories()
+    setCategories(categories)
+  }, [])
 
-    return (
-        categories.length && <Table
-            title="Categories"
-            records={categories}
-        />
-    )
+  return (
+    categories.length && <Table
+      title="Categories"
+      records={categories}
+    />
+  )
 }
 
 export default Categories
