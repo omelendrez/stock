@@ -9,7 +9,7 @@ const Units = () => {
   const [units, setUnits] = useState([])
   const [showForm, setShowForm] = useState(false)
   const [status, setStatus] = useState([])
-  const [companies, SetCompanies] = useState([])
+  const [companies, setCompanies] = useState([])
 
   useEffect(() => {
     const units = getUnits()
@@ -17,7 +17,7 @@ const Units = () => {
     const status = getStatus()
     setStatus(status)
     const companies = getCompanies()
-    SetCompanies(companies)
+    setCompanies(companies)
   }, [])
 
   const addRecord = e => {

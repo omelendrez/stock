@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { getUsers } from './../services/users'
 import { getStatus } from './../services/status'
 import { getCompanies } from './../services/companies'
+import { getProfiles } from './../services/profiles'
 import Table from './common/Table'
 import Form from './common/Form'
 
@@ -9,7 +10,8 @@ const Users = () => {
   const [users, setUsers] = useState([])
   const [showForm, setShowForm] = useState(false)
   const [status, setStatus] = useState([])
-  const [companies, SetCompanies] = useState([])
+  const [companies, setCompanies] = useState([])
+  const [profiles, setProfiles] = useState([])
 
   useEffect(() => {
     const users = getUsers()
@@ -17,7 +19,9 @@ const Users = () => {
     const status = getStatus()
     setStatus(status)
     const companies = getCompanies()
-    SetCompanies(companies)
+    setCompanies(companies)
+    const profiles = getProfiles()
+    setProfiles(profiles)
   }, [])
 
   const addRecord = e => {
@@ -68,9 +72,11 @@ const Users = () => {
             <input type="text" id="fullName" className="form-control" />
           </div>
 
-          <div className="form-group">
-            <label for="name">Profiles</label>
-            <input type="text" id="profile" className="form-control" />
+          <div class="form-group">
+            <label for="status">Profiles</label>
+            <select className="form-control" id="status">
+              {profiles.map(st => <option value={st.id}>{st.name}</option>)}
+            </select>
           </div>
 
           <div class="form-group">
