@@ -4,7 +4,7 @@ import Header from './Header'
 const Table = ({ title, records, editRecord }) => {
   const pagination = {
     curPage: 1,
-    pageSize: 5
+    pageSize: 10
   }
   const [pageState, setPageState] = useState(pagination)
   const [pageItems, setPageItems] = useState([])
