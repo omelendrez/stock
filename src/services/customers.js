@@ -8,8 +8,8 @@ const customers = [
     email: '',
     contact: 'Zulema',
     vat: 0,
-    companyId: '1 - Veterinaria Colitas Felices',
-    statusId: '1 - Active'
+    companyId: 'Veterinaria Colitas Felices',
+    statusId: 'Active'
   },
   {
     id: 2,
@@ -20,8 +20,8 @@ const customers = [
     email: '',
     contact: 'Juan',
     vat: 0,
-    companyId: '1 - Veterinaria Colitas Felices',
-    statusId: '1 - Active'
+    companyId: 'Veterinaria Colitas Felices',
+    statusId: 'Active'
   }
 
 ]

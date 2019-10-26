@@ -3,7 +3,7 @@ const companies = [
     id: 1,
     code: 'VET-CF',
     name: 'Veterinaria Colitas Felices',
-    statusId: '1 - Active'
+    statusId: 'Active'
   }
 ]
 

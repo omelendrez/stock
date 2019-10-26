@@ -6,8 +6,8 @@ const suppliers = [
     phoneNumber: '154737118',
     address: '',
     contact: 'Oscar',
-    companyId: '1 - Veterinaria Colitas Felices',
-    statusId: '1 - Active'
+    companyId: 'Veterinaria Colitas Felices',
+    statusId: 'Active'
   },
   {
     id: 2,
@@ -16,8 +16,8 @@ const suppliers = [
     phoneNumber: '4812211',
     address: 'Necochea 636',
     contact: 'Leonardo Mayo',
-    companyId: '1 - Veterinaria Colitas Felices',
-    statusId: '1 - Active'
+    companyId: 'Veterinaria Colitas Felices',
+    statusId: 'Active'
   },
   {
     id: 3,
@@ -26,8 +26,8 @@ const suppliers = [
     phoneNumber: '154142467',
     address: '',
     contact: 'Americo',
-    companyId: '1 - Veterinaria Colitas Felices',
-    statusId: '1 - Active'
+    companyId: 'Veterinaria Colitas Felices',
+    statusId: 'Active'
   },
   {
     id: 4,
@@ -36,8 +36,8 @@ const suppliers = [
     phoneNumber: '2914738145',
     address: '',
     contact: 'Facundo',
-    companyId: '1 - Veterinaria Colitas Felices',
-    statusId: '1 - Active'
+    companyId: 'Veterinaria Colitas Felices',
+    statusId: 'Active'
   }
 ]
 
