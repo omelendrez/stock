@@ -27,3 +27,4 @@ const customers = [
 ]
 
 export const getCustomers = () => customers
+export const saveCustomer = customer => console.log(customer)

@@ -74,3 +74,4 @@ const categories = [
 ]
 
 export const getCategories = () => categories
+export const saveCategory = category => console.log(category)

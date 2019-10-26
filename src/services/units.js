@@ -62,3 +62,4 @@ const units = [
 ]
 
 export const getUnits = () => units
+export const saveUnit = unit => console.log(unit)

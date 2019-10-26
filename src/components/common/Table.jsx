@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
 import Header from './Header'
 
 const Table = ({ title, records }) => {
@@ -27,10 +27,11 @@ const Table = ({ title, records }) => {
   return (
     pageItems.length && <div className="table-responsive">
       <Header title={title} />
-      <table className="table">
+      <table className="table table-sm">
         <thead className="thead-light">
           <tr>
             <Headers record={pageItems[0]} />
+            <th colSpan="2"></th>
           </tr>
         </thead>
         <tbody>
@@ -47,12 +48,18 @@ const Table = ({ title, records }) => {
   )
 }
 
-const Headers = ({ record }) => Object.keys(record).map((field, index) => <th className="text-uppercase" key={index}>{field.replace(/_/g, ' ')}</th >)
+const Headers = ({ record }) => Object.keys(record).map((field, index) => <th className="text-uppercase" key={index}>{field.replace(/_/g, ' ')}</th>)
 
-const Body = ({ records }) => records.map((record, index) => (<tr key={index}><Row record={record} /></tr>))
+const Body = ({ records }) => records.map((record, index) => (<tr key={index}><Row record={record} /><Buttons /></tr>))
 
 const Row = ({ record }) => Object.keys(record).map((field, index) => <td key={index}>{record[field]}</td>)
 
+const Buttons = ({ record }) => (
+  <td>
+    <button className="btn btn-sm btn-danger mr-3">Delete</button>
+    <button className="btn btn-sm btn-primary">Edit</button>
+  </td>
+)
 const Pagination = ({ pageState, records, setPage }) => {
   const { pageSize, curPage } = pageState
   const buttons = [...Array(Math.ceil(records / pageSize)).keys()].map(i => i + 1)

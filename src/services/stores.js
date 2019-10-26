@@ -9,3 +9,4 @@ const stores = [
 ]
 
 export const getStores = () => stores
+export const saveStore = store => console.log(store)

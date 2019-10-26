@@ -27,3 +27,4 @@ const profiles = [
 ]
 
 export const getProfiles = () => profiles
+export const saveProfile = profile => console.log(profile)

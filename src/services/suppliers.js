@@ -42,3 +42,4 @@ const suppliers = [
 ]
 
 export const getSuppliers = () => suppliers
+export const saveSupplier = supplier => console.log(supplier)

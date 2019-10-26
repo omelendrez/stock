@@ -33,3 +33,4 @@ const products = [
 ]
 
 export const getProducts = () => products
+export const saveProduct = product => console.log(product)
