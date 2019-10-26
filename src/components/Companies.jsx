@@ -37,14 +37,19 @@ const Companies = () => {
 
   const cancel = e => {
     e.preventDefault()
+    setCompany(defaultCompany)
     setShowForm(false)
   }
-
 
   const updateForm = e => {
     e.preventDefault()
     const newCompany = { ...company, [e.target.id]: e.target.value }
     setCompany(newCompany)
+  }
+
+  const editRecord = company => {
+    setCompany(company)
+    setShowForm(true)
   }
 
   const { code, name, statusId } = company
@@ -55,6 +60,7 @@ const Companies = () => {
         {companies.length && <Table
           title="Companies"
           records={companies}
+          editRecord={editRecord}
         />}
         <button className="btn btn-primary m-2" onClick={e => addRecord(e)}>Add Company</button>
       </React.Fragment>}

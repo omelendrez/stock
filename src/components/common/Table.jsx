@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import Header from './Header'
 
-const Table = ({ title, records }) => {
+const Table = ({ title, records, editRecord }) => {
   const pagination = {
     curPage: 1,
     pageSize: 5
@@ -35,7 +35,7 @@ const Table = ({ title, records }) => {
           </tr>
         </thead>
         <tbody>
-          <Body records={pageItems} />
+          <Body records={pageItems} editRecord={editRecord} />
         </tbody>
       </table>
       <Pagination
@@ -50,14 +50,14 @@ const Table = ({ title, records }) => {
 
 const Headers = ({ record }) => Object.keys(record).map((field, index) => <th className="text-uppercase" key={index}>{field.replace(/_/g, ' ')}</th>)
 
-const Body = ({ records }) => records.map((record, index) => (<tr key={index}><Row record={record} /><Buttons /></tr>))
+const Body = ({ records, editRecord }) => records.map((record, index) => (<tr key={index}><Row record={record} /><Buttons record={record} editRecord={editRecord} /></tr>))
 
 const Row = ({ record }) => Object.keys(record).map((field, index) => <td key={index}>{record[field]}</td>)
 
-const Buttons = ({ record }) => (
+const Buttons = ({ record, editRecord }) => (
   <td>
     <button className="btn btn-sm btn-danger mr-3">Delete</button>
-    <button className="btn btn-sm btn-primary">Edit</button>
+    <button className="btn btn-sm btn-primary" onClick={() => editRecord(record)}>Edit</button>
   </td>
 )
 const Pagination = ({ pageState, records, setPage }) => {
