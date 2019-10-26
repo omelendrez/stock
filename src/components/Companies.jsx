@@ -78,7 +78,7 @@ const Companies = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="status">Status</label>
+            <label htmlFor="statusId">Status</label>
             <select className="form-control" id="statusId" value={statusId} onChange={e => updateForm(e)}>
               {status.map(st => <option key={st.id} value={st.id}>{st.name}</option>)}
             </select>

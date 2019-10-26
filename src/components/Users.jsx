@@ -50,7 +50,7 @@ const Users = () => {
         <button className="btn btn-primary m-2" onClick={e => addRecord(e)}>Add Users</button>
       </React.Fragment>}
       {showForm &&
-        <Form title="Suppliers" save={save} cancel={cancel}>
+        <Form title="Users" save={save} cancel={cancel}>
 
           <div className="form-group">
             <label htmlFor="userName">User Name</label>

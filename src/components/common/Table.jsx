@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import Header from './Header'
 
 const Table = ({ title, records, editRecord }) => {
