@@ -53,42 +53,37 @@ const Users = () => {
         <Form title="Suppliers" save={save} cancel={cancel}>
 
           <div className="form-group">
-            <label for="code">Code</label>
-            <input type="text" id="code" className="form-control" />
-          </div>
-
-          <div className="form-group">
-            <label for="name">User Name</label>
+            <label htmlFor="userName">User Name</label>
             <input type="text" id="userName" className="form-control" />
           </div>
 
           <div className="form-group">
-            <label for="name">Email</label>
+            <label htmlFor="email">Email</label>
             <input type="text" id="email" className="form-control" />
           </div>
 
           <div className="form-group">
-            <label for="name">Full Name</label>
+            <label htmlFor="fullName">Full Name</label>
             <input type="text" id="fullName" className="form-control" />
           </div>
 
           <div class="form-group">
-            <label for="status">Profiles</label>
-            <select className="form-control" id="status">
+            <label htmlFor="profileId">Profiles</label>
+            <select className="form-control" id="profileId">
               {profiles.map(st => <option value={st.id}>{st.name}</option>)}
             </select>
           </div>
 
           <div class="form-group">
-            <label for="status">Companies</label>
-            <select className="form-control" id="status">
+            <label htmlFor="companyId">Companies</label>
+            <select className="form-control" id="companyId">
               {companies.map(st => <option value={st.id}>{st.name}</option>)}
             </select>
           </div>
 
           <div class="form-group">
-            <label for="status">Status</label>
-            <select className="form-control" id="status">
+            <label htmlFor="statusId">Status</label>
+            <select className="form-control" id="statusId">
               {status.map(st => <option value={st.id}>{st.name}</option>)}
             </select>
           </div>

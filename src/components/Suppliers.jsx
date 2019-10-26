@@ -48,40 +48,40 @@ const Suppliers = () => {
         <Form title="Suppliers" save={save} cancel={cancel}>
 
           <div className="form-group">
-            <label for="code">Code</label>
+            <label htmlFor="code">Code</label>
             <input type="text" id="code" className="form-control" />
           </div>
 
           <div className="form-group">
-            <label for="name">Name</label>
+            <label htmlFor="name">Name</label>
             <input type="text" id="name" className="form-control" />
           </div>
 
           <div className="form-group">
-            <label for="name">Phone Number</label>
-            <input type="text" id="phone" className="form-control" />
+            <label htmlFor="phoneNumber">Phone Number</label>
+            <input type="text" id="phoneNumber" className="form-control" />
           </div>
 
           <div className="form-group">
-            <label for="name">Adress</label>
-            <input type="text" id="adress" className="form-control" />
+            <label htmlFor="address">Address</label>
+            <input type="text" id="address" className="form-control" />
           </div>
 
           <div className="form-group">
-            <label for="name">Contact</label>
+            <label htmlFor="contact">Contact</label>
             <input type="text" id="contact" className="form-control" />
           </div>
 
           <div class="form-group">
-            <label for="status">Companies</label>
-            <select className="form-control" id="status">
+            <label htmlFor="companyId">Company</label>
+            <select className="form-control" id="companyId">
               {companies.map(st => <option value={st.id}>{st.name}</option>)}
             </select>
           </div>
 
           <div class="form-group">
-            <label for="status">Status</label>
-            <select className="form-control" id="status">
+            <label htmlFor="statusId">Status</label>
+            <select className="form-control" id="statusId">
               {status.map(st => <option value={st.id}>{st.name}</option>)}
             </select>
           </div>

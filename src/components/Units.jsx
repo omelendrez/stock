@@ -48,18 +48,18 @@ const Units = () => {
         <Form title="Units" save={save} cancel={cancel}>
 
           <div className="form-group">
-            <label for="code">Code</label>
+            <label htmlFor="code">Code</label>
             <input type="text" id="code" className="form-control" />
           </div>
 
           <div className="form-group">
-            <label for="name">Name</label>
+            <label htmlFor="name">Name</label>
             <input type="text" id="name" className="form-control" />
           </div>
 
           <div class="form-group">
-            <label for="status">Companies</label>
-            <select className="form-control" id="status">
+            <label htmlFor="companyId">Company</label>
+            <select className="form-control" id="companyId">
               {companies.map(st => <option value={st.id}>{st.name}</option>)}
             </select>
           </div>
