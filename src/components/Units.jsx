@@ -1,21 +1,24 @@
 import React, { useState, useEffect } from 'react'
-import { getUnits } from './../services/units'
-import { getStatus } from './../services/status'
+import { getUnits, saveUnit } from './../services/units'
 import { getCompanies } from './../services/companies'
 import Table from './common/Table'
 import Form from './common/Form'
 
 const Units = () => {
+  const defaultUnit = {
+    id: -1,
+    code: "",
+    name: "",
+    companyId: "",
+  }
   const [units, setUnits] = useState([])
   const [showForm, setShowForm] = useState(false)
-  const [status, setStatus] = useState([])
   const [companies, setCompanies] = useState([])
+  const [unit, setUnit] = useState(defaultUnit)
 
   useEffect(() => {
     const units = getUnits()
     setUnits(units)
-    const status = getStatus()
-    setStatus(status)
     const companies = getCompanies()
     setCompanies(companies)
   }, [])
@@ -27,13 +30,29 @@ const Units = () => {
 
   const save = e => {
     e.preventDefault()
+    saveUnit(unit)
+    setUnit(defaultUnit)
     setShowForm(false)
   }
 
   const cancel = e => {
     e.preventDefault()
+    setUnit(defaultUnit)
     setShowForm(false)
   }
+
+  const updateForm = e => {
+    e.preventDefault()
+    const newUnit = { ...unit, [e.target.id]: e.target.value }
+    setUnit(newUnit)
+  }
+
+  const editRecord = unit => {
+    setUnit(unit)
+    setShowForm(true)
+  }
+
+  const { code, name, companyId } = unit
 
   return (
     <React.Fragment>
@@ -41,25 +60,26 @@ const Units = () => {
         {units.length && <Table
           title="Units"
           records={units}
+          editRecord={editRecord}
         />}
-        <button className="btn btn-primary m-2" onClick={e => addRecord(e)}>Add Units</button>
+        <button className="btn btn-primary m-2" onClick={e => addRecord(e)}>Add Unit</button>
       </React.Fragment>}
       {showForm &&
         <Form title="Units" save={save} cancel={cancel}>
 
           <div className="form-group">
             <label htmlFor="code">Code</label>
-            <input type="text" id="code" className="form-control" />
+            <input type="text" id="code" className="form-control" value={code} onChange={e => updateForm(e)} />
           </div>
 
           <div className="form-group">
             <label htmlFor="name">Name</label>
-            <input type="text" id="name" className="form-control" />
+            <input type="text" id="name" className="form-control" value={name} onChange={e => updateForm(e)} />
           </div>
 
           <div class="form-group">
             <label htmlFor="companyId">Company</label>
-            <select className="form-control" id="companyId">
+            <select className="form-control" id="companyId" value={companyId} onChange={e => updateForm(e)} >
               {companies.map(st => <option value={st.id}>{st.name}</option>)}
             </select>
           </div>

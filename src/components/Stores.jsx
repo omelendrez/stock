@@ -1,15 +1,23 @@
 import React, { useState, useEffect } from 'react'
-import { getStores } from './../services/stores'
+import { getStores, saveStore } from './../services/stores'
 import { getStatus } from './../services/status'
 import { getCompanies } from './../services/companies'
 import Table from './common/Table'
 import Form from './common/Form'
 
 const Stores = () => {
+  const defaultStore = {
+    id: -1,
+    code: "",
+    name: "",
+    companyId: "",
+    statusId: "1",
+  }
   const [stores, setStores] = useState([])
   const [showForm, setShowForm] = useState(false)
   const [status, setStatus] = useState([])
   const [companies, setCompanies] = useState([])
+  const [store, setStore] = useState(defaultStore)
 
   useEffect(() => {
     const stores = getStores()
@@ -27,13 +35,29 @@ const Stores = () => {
 
   const save = e => {
     e.preventDefault()
+    saveStore(store)
+    setStore(defaultStore)
     setShowForm(false)
   }
 
   const cancel = e => {
     e.preventDefault()
+    setStore(defaultStore)
     setShowForm(false)
   }
+
+  const updateForm = e => {
+    e.preventDefault()
+    const newStore = { ...store, [e.target.id]: e.target.value }
+    setStore(newStore)
+  }
+
+  const editRecord = store => {
+    setStore(store)
+    setShowForm(true)
+  }
+
+  const { code, name, companyId, statusId } = store
 
   return (
     <React.Fragment>
@@ -41,6 +65,7 @@ const Stores = () => {
         {stores.length && <Table
           title="Stores"
           records={stores}
+          editRecord={editRecord}
         />}
         <button className="btn btn-primary m-2" onClick={e => addRecord(e)}>Add Store</button>
       </React.Fragment>}
@@ -49,24 +74,24 @@ const Stores = () => {
 
           <div className="form-group">
             <label htmlFor="code">Code</label>
-            <input type="text" id="code" className="form-control" />
+            <input type="text" id="code" className="form-control" value={code} onChange={e => updateForm(e)} />
           </div>
 
           <div className="form-group">
             <label htmlFor="name">Name</label>
-            <input type="text" id="name" className="form-control" />
+            <input type="text" id="name" className="form-control" value={name} onChange={e => updateForm(e)} />
           </div>
 
           <div class="form-group">
             <label htmlFor="companyId">Company</label>
-            <select className="form-control" id="companyId">
+            <select className="form-control" id="companyId" value={companyId} onChange={e => updateForm(e)} >
               {companies.map(st => <option value={st.id}>{st.name}</option>)}
             </select>
           </div>
 
           <div class="form-group">
             <label htmlFor="statusId">Status</label>
-            <select className="form-control" id="statusId">
+            <select className="form-control" id="statusId" value={statusId} onChange={e => updateForm(e)} >
               {status.map(st => <option value={st.id}>{st.name}</option>)}
             </select>
           </div>
