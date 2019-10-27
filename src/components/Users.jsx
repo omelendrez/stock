@@ -93,24 +93,24 @@ const Users = () => {
             <input type="text" id="fullName" className="form-control" value={fullName} onChange={e => updateForm(e)} />
           </div>
 
-          <div class="form-group">
+          <div className="form-group">
             <label htmlFor="profileId">Profiles</label>
             <select className="form-control" id="profileId" value={profileId} onChange={e => updateForm(e)} >
-              {profiles.map(st => <option value={st.id}>{st.name}</option>)}
+              {profiles.map(st => <option key={st.id} value={st.id}>{st.name}</option>)}
             </select>
           </div>
 
-          <div class="form-group">
+          <div className="form-group">
             <label htmlFor="companyId">Companies</label>
             <select className="form-control" id="companyId" value={companyId} onChange={e => updateForm(e)} >
-              {companies.map(st => <option value={st.id}>{st.name}</option>)}
+              {companies.map(st => <option key={st.id} value={st.id}>{st.name}</option>)}
             </select>
           </div>
 
-          <div class="form-group">
+          <div className="form-group">
             <label htmlFor="statusId">Status</label>
             <select className="form-control" id="statusId" value={statusId} onChange={e => updateForm(e)} >
-              {status.map(st => <option value={st.id}>{st.name}</option>)}
+              {status.map(st => <option key={st.id} value={st.id}>{st.name}</option>)}
             </select>
           </div>
 
