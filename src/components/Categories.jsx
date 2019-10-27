@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import { getCategories } from './../services/categories'
-import { getStatus } from './../services/status'
+import { getCompanies } from './../services/companies'
 import Table from './common/Table'
 import Form from './common/Form'
 
 const Categories = () => {
   const [categories, setCategories] = useState([])
   const [showForm, setShowForm] = useState(false)
-  const [status, setStatus] = useState([])
+  const [companies, setCompanies] = useState([])
 
   useEffect(() => {
     const categories = getCategories()
     setCategories(categories)
-    const status = getStatus()
-    setStatus(status)
+    const companies = getCompanies()
+    setCompanies(companies)
   }, [])
 
   const addRecord = e => {
@@ -54,9 +54,9 @@ const Categories = () => {
           </div>
 
           <div class="form-group">
-            <label for="status">Status</label>
-            <select className="form-control" id="status">
-              {status.map(st => <option value={st.id}>{st.name}</option>)}
+            <label for="Company">Company_ID</label>
+            <select className="form-control" id="companyId">
+              {companies.map(st => <option value={st.id}>{st.name}</option>)}
             </select>
           </div>
 

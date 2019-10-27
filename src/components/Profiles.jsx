@@ -53,13 +53,6 @@ const Profiles = () => {
             <input type="text" id="name" className="form-control" />
           </div>
 
-          <div class="form-group">
-            <label for="status">Status</label>
-            <select className="form-control" id="status">
-              {status.map(st => <option value={st.id}>{st.name}</option>)}
-            </select>
-          </div>
-
         </Form>
       }
     </React.Fragment>
