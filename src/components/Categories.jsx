@@ -54,7 +54,7 @@ const Categories = () => {
           </div>
 
           <div class="form-group">
-            <label for="Company">Company_ID</label>
+            <label for="companyId">Company</label>
             <select className="form-control" id="companyId">
               {companies.map(st => <option value={st.id}>{st.name}</option>)}
             </select>

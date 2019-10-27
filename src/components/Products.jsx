@@ -66,15 +66,15 @@ const Products = () => {
           </div>
 
           <div class="form-group">
-            <label for="category">Category_ID</label>
-            <select className="form-control" id="Category_Id">
+            <label for="categoryId">Category</label>
+            <select className="form-control" id="categoryId">
               {categories.map(st => <option value={st.id}>{st.name}</option>)}
             </select>
           </div>
-          
+
           <div class="form-group">
-            <label for="unit">Unit_ID</label>
-            <select className="form-control" id="Unit_id">
+            <label for="unitId">Unit</label>
+            <select className="form-control" id="unitId">
               {units.map(st => <option value={st.id}>{st.name}</option>)}
             </select>
           </div>
@@ -90,15 +90,15 @@ const Products = () => {
           </div>
 
           <div class="form-group">
-            <label for="Company">Company_ID</label>
+            <label for="companyId">Company</label>
             <select className="form-control" id="companyId">
               {companies.map(st => <option value={st.id}>{st.name}</option>)}
             </select>
           </div>
 
           <div class="form-group">
-            <label for="status">Status</label>
-            <select className="form-control" id="status">
+            <label for="statusId">Status</label>
+            <select className="form-control" id="statusId">
               {status.map(st => <option value={st.id}>{st.name}</option>)}
             </select>
           </div>

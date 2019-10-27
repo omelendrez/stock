@@ -69,7 +69,7 @@ const Customers = () => {
 
           <div className="form-group">
             <label for="email">Email</label>
-            <input type="text" id="email" className="form-control" />
+            <input type="email" id="email" className="form-control" />
           </div>
 
           <div className="form-group">
@@ -83,15 +83,15 @@ const Customers = () => {
           </div>
 
           <div class="form-group">
-            <label for="Company">Company_ID</label>
+            <label for="companyId">Company</label>
             <select className="form-control" id="companyId">
               {companies.map(st => <option value={st.id}>{st.name}</option>)}
             </select>
           </div>
 
           <div class="form-group">
-            <label for="status">Status</label>
-            <select className="form-control" id="status">
+            <label for="statusId">Status</label>
+            <select className="form-control" id="statusId">
               {status.map(st => <option value={st.id}>{st.name}</option>)}
             </select>
           </div>
