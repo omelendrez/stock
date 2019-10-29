@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { getStores, saveStore } from './../services/stores'
+import { getStores, saveStore, deleteStore } from './../services/stores'
 import { getStatus } from './../services/status'
 import { getCompanies } from './../services/companies'
 import Table from './common/Table'
@@ -57,6 +57,10 @@ const Stores = () => {
     setShowForm(true)
   }
 
+  const deleteRecord = store => {
+    deleteStore(store)
+  }
+
   const { code, name, companyId, statusId } = store
 
   return (
@@ -66,6 +70,7 @@ const Stores = () => {
           title="Stores"
           records={stores}
           editRecord={editRecord}
+          deleteRecord={deleteRecord}
         />}
         <button className="btn btn-primary m-2" onClick={e => addRecord(e)}>Add Store</button>
       </React.Fragment>}
