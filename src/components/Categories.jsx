@@ -6,11 +6,11 @@ import Form from './common/Form'
 
 const Categories = () => {
   const defaultCategory = {
-      id: -1,
-      code: "",
-      name: "",
-      companyId: "1", 
-    }
+    id: -1,
+    code: "",
+    name: "",
+    companyId: "1",
+  }
 
   const [category, setCategory] = useState(defaultCategory)
   const [categories, setCategories] = useState([])
@@ -69,17 +69,17 @@ const Categories = () => {
 
           <div className="form-group">
             <label for="code">Code</label>
-            <input type="text" id="code" className="form-control" />
+            <input type="text" id="code" className="form-control" value={code} onChange={e => updateForm(e)} />
           </div>
 
           <div className="form-group">
             <label for="name">Name</label>
-            <input type="text" id="name" className="form-control" />
+            <input type="text" id="name" className="form-control" value={name} onChange={e => updateForm(e)} />
           </div>
 
           <div class="form-group">
             <label for="companyId">Company</label>
-            <select className="form-control" id="companyId">
+            <select className="form-control" id="companyId" value={companyId} onChange={e => updateForm(e)}>
               {companies.map(st => <option value={st.id}>{st.name}</option>)}
             </select>
           </div>
