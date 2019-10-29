@@ -22,3 +22,4 @@ const users = [
 
 export const getUsers = () => users
 export const saveUser = user => console.log(user)
+export const deleteUser = user => console.log(user)

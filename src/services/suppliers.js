@@ -43,3 +43,4 @@ const suppliers = [
 
 export const getSuppliers = () => suppliers
 export const saveSupplier = supplier => console.log(supplier)
+export const deleteSupplier = supplier => console.log(supplier)

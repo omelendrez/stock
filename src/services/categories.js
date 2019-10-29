@@ -75,3 +75,4 @@ const categories = [
 
 export const getCategories = () => categories
 export const saveCategory = category => console.log(category)
+export const deleteCategory = category => console.log(category)

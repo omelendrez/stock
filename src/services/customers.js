@@ -28,3 +28,4 @@ const customers = [
 
 export const getCustomers = () => customers
 export const saveCustomer = customer => console.log(customer)
+export const deleteCustomer = customer => console.log(customer)

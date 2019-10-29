@@ -9,3 +9,4 @@ const companies = [
 
 export const getCompanies = () => companies
 export const saveCompany = company => console.log(company)
+export const deleteCompany = company => console.log(company)

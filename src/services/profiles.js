@@ -28,3 +28,4 @@ const profiles = [
 
 export const getProfiles = () => profiles
 export const saveProfile = profile => console.log(profile)
+export const deleteProfile = profile => console.log(profile)

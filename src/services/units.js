@@ -63,3 +63,4 @@ const units = [
 
 export const getUnits = () => units
 export const saveUnit = unit => console.log(unit)
+export const deleteUnit = unit => console.log(unit)
