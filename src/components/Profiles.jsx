@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from 'react'
-import { getProfiles } from './../services/profiles'
-import { getStatus } from './../services/status'
+import { getProfiles, saveProfile } from './../services/profiles'
 import Table from './common/Table'
 import Form from './common/Form'
 
 const Profiles = () => {
+  const defaultProfile = {
+    id: -1,
+    code: "",
+    name: ""
+  }
+  const [profile, setProfile] = useState(defaultProfile)
   const [profiles, setProfiles] = useState([])
   const [showForm, setShowForm] = useState(false)
-  const [status, setStatus] = useState([])
 
   useEffect(() => {
     const profiles = getProfiles()
     setProfiles(profiles)
-    const status = getStatus()
-    setStatus(status)
   }, [])
 
   const addRecord = e => {
@@ -23,13 +25,29 @@ const Profiles = () => {
 
   const save = e => {
     e.preventDefault()
+    saveProfile(profile)
+    setProfile(defaultProfile)
     setShowForm(false)
   }
 
   const cancel = e => {
     e.preventDefault()
+    setProfile(defaultProfile)
     setShowForm(false)
   }
+
+  const updateForm = e => {
+    e.preventDefault()
+    const newProfile = { ...profile, [e.target.id]: e.target.value }
+    setProfile(newProfile)
+  }
+
+  const editRecord = profile => {
+    setProfile(profile)
+    setShowForm(true)
+  }
+
+  const { code, name } = profile
 
   return (
     <React.Fragment>
@@ -37,6 +55,7 @@ const Profiles = () => {
         {profiles.length && <Table
           title="Profiles"
           records={profiles}
+          editRecord={editRecord}
         />}
         <button className="btn btn-primary m-2" onClick={e => addRecord(e)}>Add Profile</button>
       </React.Fragment>}
@@ -45,12 +64,12 @@ const Profiles = () => {
 
           <div className="form-group">
             <label for="code">Code</label>
-            <input type="text" id="code" className="form-control" />
+            <input type="text" id="code" className="form-control" value={code} onChange={e => updateForm(e)} />
           </div>
 
           <div className="form-group">
             <label for="name">Name</label>
-            <input type="text" id="name" className="form-control" />
+            <input type="text" id="name" className="form-control" value={name} onChange={e => updateForm(e)} />
           </div>
 
         </Form>
