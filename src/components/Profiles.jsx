@@ -63,12 +63,12 @@ const Profiles = () => {
         <Form title="Profiles" save={save} cancel={cancel}>
 
           <div className="form-group">
-            <label for="code">Code</label>
+            <label htmlFor="code">Code</label>
             <input type="text" id="code" className="form-control" value={code} onChange={e => updateForm(e)} />
           </div>
 
           <div className="form-group">
-            <label for="name">Name</label>
+            <label htmlFor="name">Name</label>
             <input type="text" id="name" className="form-control" value={name} onChange={e => updateForm(e)} />
           </div>
 

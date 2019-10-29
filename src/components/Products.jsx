@@ -85,55 +85,55 @@ const Products = () => {
         <Form title="Products" save={save} cancel={cancel}>
 
           <div className="form-group">
-            <label for="code">Code</label>
+            <label htmlFor="code">Code</label>
             <input type="text" id="code" className="form-control" value={code} onChange={e => updateForm(e)} />
           </div>
 
           <div className="form-group">
-            <label for="name">Name</label>
+            <label htmlFor="name">Name</label>
             <input type="text" id="name" className="form-control" value={name} onChange={e => updateForm(e)} />
           </div>
 
-          <div class="form-group">
-            <label for="categoryId">Category</label>
+          <div className="form-group">
+            <label htmlFor="categoryId">Category</label>
             <select className="form-control" id="categoryId" value={categoryId} onChange={e => updateForm(e)}>
-              {categories.map(st => <option value={st.id}>{st.name}</option>)}
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="unitId">Unit</label>
-            <select className="form-control" id="unitId" value={unitId} onChange={e => updateForm(e)}>
-              {units.map(st => <option value={st.id}>{st.name}</option>)}
+              {categories.map(st => <option key={st.id} value={st.id}>{st.name}</option>)}
             </select>
           </div>
 
           <div className="form-group">
-            <label for="minimum">Minimum</label>
+            <label htmlFor="unitId">Unit</label>
+            <select className="form-control" id="unitId" value={unitId} onChange={e => updateForm(e)}>
+              {units.map(st => <option key={st.id} value={st.id}>{st.name}</option>)}
+            </select>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="minimum">Minimum</label>
             <input type="number" id="minimum" className="form-control" value={minimum} onChange={e => updateForm(e)} />
           </div>
 
           <div className="form-group">
-            <label for="vat">V.A.T.</label>
+            <label htmlFor="vat">V.A.T.</label>
             <input type="number" id="vat" className="form-control" value={vat} onChange={e => updateForm(e)} />
           </div>
 
           <div className="form-group">
-            <label for="price">Price</label>
+            <label htmlFor="price">Price</label>
             <input type="number" id="price" className="form-control" value={price} onChange={e => updateForm(e)} />
           </div>
 
-          <div class="form-group">
-            <label for="companyId">Company</label>
+          <div className="form-group">
+            <label htmlFor="companyId">Company</label>
             <select className="form-control" id="companyId" value={companyId} onChange={e => updateForm(e)}>
-              {companies.map(st => <option value={st.id}>{st.name}</option>)}
+              {companies.map(st => <option key={st.id} value={st.id}>{st.name}</option>)}
             </select>
           </div>
 
-          <div class="form-group">
-            <label for="statusId">Status</label>
+          <div className="form-group">
+            <label htmlFor="statusId">Status</label>
             <select className="form-control" id="statusId" value={statusId} onChange={e => updateForm(e)}>
-              {status.map(st => <option value={st.id}>{st.name}</option>)}
+              {status.map(st => <option key={st.id} value={st.id}>{st.name}</option>)}
             </select>
           </div>
 
