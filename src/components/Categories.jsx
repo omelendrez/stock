@@ -1,10 +1,18 @@
 import React, { useState, useEffect } from 'react'
-import { getCategories } from './../services/categories'
+import { getCategories, saveCategory } from './../services/categories'
 import { getCompanies } from './../services/companies'
 import Table from './common/Table'
 import Form from './common/Form'
 
 const Categories = () => {
+  const defaultCategory = {
+      id: -1,
+      code: "",
+      name: "",
+      companyId: "1", 
+    }
+
+  const [category, setCategory] = useState(defaultCategory)
   const [categories, setCategories] = useState([])
   const [showForm, setShowForm] = useState(false)
   const [companies, setCompanies] = useState([])
@@ -23,6 +31,8 @@ const Categories = () => {
 
   const save = e => {
     e.preventDefault()
+    saveCategory(category)
+    setCategory(defaultCategory)
     setShowForm(false)
   }
 
@@ -31,12 +41,26 @@ const Categories = () => {
     setShowForm(false)
   }
 
+  const updateForm = e => {
+    e.preventDefault()
+    const newCategory = { ...category, [e.target.id]: e.target.value }
+    setCategory(newCategory)
+  }
+
+  const editRecord = category => {
+    setCategory(category)
+    setShowForm(true)
+  }
+
+  const { code, name, companyId } = category
+
   return (
     <React.Fragment>
       {!showForm && <React.Fragment>
         {categories.length && <Table
           title="Categories"
           records={categories}
+          editRecord={editRecord}
         />}
         <button className="btn btn-primary m-2" onClick={e => addRecord(e)}>Add Category</button>
       </React.Fragment>}

@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import { getProfiles } from './../services/profiles'
+import { getProfiles, saveProfile } from './../services/profiles'
 import { getStatus } from './../services/status'
 import Table from './common/Table'
 import Form from './common/Form'
 
 const Profiles = () => {
+  const defaultProfile = {
+  id: -1,
+  code: "",
+  name: ""
+}
+  const [profile, setProfile] = useState(defaultProfile)
   const [profiles, setProfiles] = useState([])
   const [showForm, setShowForm] = useState(false)
   const [status, setStatus] = useState([])
@@ -23,13 +29,29 @@ const Profiles = () => {
 
   const save = e => {
     e.preventDefault()
+    saveProfile(profile)
+    setProfile(defaultProfile)
     setShowForm(false)
   }
 
   const cancel = e => {
     e.preventDefault()
+    setProfiles(defaultProfile)
     setShowForm(false)
   }
+
+  const updateForm = e => {
+    e.preventDefault()
+    const newProfile = { ...profiles, [e.target.id]: e.target.value }
+    setProfiles(newProfile)
+  }
+
+  const editRecord = profile => {
+    setProfiles(profile)
+    setShowForm(true)
+  }
+
+  const { code, name } = profiles
 
   return (
     <React.Fragment>
@@ -37,6 +59,7 @@ const Profiles = () => {
         {profiles.length && <Table
           title="Profiles"
           records={profiles}
+          editRecord={editRecord}
         />}
         <button className="btn btn-primary m-2" onClick={e => addRecord(e)}>Add Profile</button>
       </React.Fragment>}

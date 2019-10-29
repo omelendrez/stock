@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { getProducts } from './../services/products'
+import { getProducts, saveProduct } from './../services/products'
 import { getCategories } from './../services/categories'
 import { getCompanies } from './../services/companies'
 import { getUnits } from './../services/units'
@@ -8,7 +8,20 @@ import Table from './common/Table'
 import Form from './common/Form'
 
 const Products = () => {
+  const defaultProduct = {
+    id: -1,
+    code: "",
+    name: "",
+    categoryId: "",
+    unitId: "",
+    minimum: 0,
+    price: 0,
+    companyId: "",
+    statusId: 1
+  }
+
   const [products, setProducts] = useState([])
+  const [product, setProduct] = useState(defaultProduct)
   const [showForm, setShowForm] = useState(false)
   const [status, setStatus] = useState([])
   const [categories, setCategories] = useState([])
@@ -35,7 +48,20 @@ const Products = () => {
 
   const save = e => {
     e.preventDefault()
+    saveProduct(product)
+    setProduct(defaultProduct)
     setShowForm(false)
+  }
+
+  const editRecord = product => {
+    setProduct(product)
+    setShowForm(true)
+  }
+
+  const updateForm = e => {
+    e.preventDefault()
+    const newProduct = { ...product, [e.target.id]: e.target.value }
+    setProduct(newProduct)
   }
 
   const cancel = e => {
@@ -43,12 +69,15 @@ const Products = () => {
     setShowForm(false)
   }
 
+  const { code, name, categoryId, unitId, minimum, price, vat, companyId, statusId } = products
+
   return (
     <React.Fragment>
       {!showForm && <React.Fragment>
         {products.length && <Table
           title="Products"
           records={products}
+          editRecord={editRecord}
         />}
         <button className="btn btn-primary m-2" onClick={e => addRecord(e)}>Add Product</button>
       </React.Fragment>}

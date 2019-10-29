@@ -1,11 +1,25 @@
 import React, { useState, useEffect } from 'react'
-import { getCustomers } from './../services/customers'
+import { getCustomers , saveCustomer } from './../services/customers'
 import { getCompanies } from './../services/companies'
 import { getStatus } from './../services/status'
 import Table from './common/Table'
 import Form from './common/Form'
 
 const Customers = () => {
+  const defaultCustomer = {
+    id: -1,
+    code: "",
+    name: "",
+    address: "",
+    phone: "",
+    email: "",
+    contact: "",
+    vat: 0,
+    companyId: "",
+    statusId: 1
+  }
+
+  const [customer, setCustomer] = useState(defaultCustomer)
   const [customers, setCustomers] = useState([])
   const [showForm, setShowForm] = useState(false)
   const [companies, setCompanies] = useState([])
@@ -35,12 +49,26 @@ const Customers = () => {
     setShowForm(false)
   }
 
+  const editRecord = customer => {
+    setCustomer(customer)
+    setShowForm(true)
+  }
+
+  const updateForm = e => {
+    e.preventDefault()
+    const newCustomer = { ...customer, [e.target.id]: e.target.value }
+    setCustomer(newCustomer)
+  }
+
+  const { code, name, address, phone, email, contact, vat, companyId, statusId } = customer
+
   return (
     <React.Fragment>
       {!showForm && <React.Fragment>
         {customers.length && <Table
           title="Customers"
           records={customers}
+          editRecord={editRecord}
         />}
         <button className="btn btn-primary m-2" onClick={e => addRecord(e)}>Add Customer</button>
       </React.Fragment>}
