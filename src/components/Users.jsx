@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { getUsers, saveUser } from './../services/users'
+import { getUsers, saveUser, deleteUser } from './../services/users'
 import { getStatus } from './../services/status'
 import { getCompanies } from './../services/companies'
 import { getProfiles } from './../services/profiles'
@@ -63,6 +63,10 @@ const Users = () => {
     setShowForm(true)
   }
 
+  const deleteRecord = user => {
+    deleteUser(user)
+  }
+
   const { userName, email, fullName, profileId, companyId, statusId } = user
 
   return (
@@ -72,6 +76,7 @@ const Users = () => {
           title="Users"
           records={users}
           editRecord={editRecord}
+          deleteRecord={deleteRecord}
         />}
         <button className="btn btn-primary m-2" onClick={e => addRecord(e)}>Add User</button>
       </React.Fragment>}

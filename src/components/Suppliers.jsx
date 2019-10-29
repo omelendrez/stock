@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { getSuppliers, saveSupplier } from './../services/suppliers'
+import { getSuppliers, saveSupplier, deleteSupplier } from './../services/suppliers'
 import { getStatus } from './../services/status'
 import { getCompanies } from './../services/companies'
 import Table from './common/Table'
 import Form from './common/Form'
+import { deleteStore } from '../services/stores'
 
 const Suppliers = () => {
   const defaultSupplier = {
@@ -60,6 +61,10 @@ const Suppliers = () => {
     setShowForm(true)
   }
 
+  const deleteRecord = supplier => {
+    deleteSupplier(supplier)
+  }
+
   const { code, name, phoneNumber, address, contact, companyId, statusId } = supplier
 
   return (
@@ -69,6 +74,7 @@ const Suppliers = () => {
           title="Suppliers"
           records={suppliers}
           editRecord={editRecord}
+          deleteRecord={deleteRecord}
         />}
         <button className="btn btn-primary m-2" onClick={e => addRecord(e)}>Add Supplier</button>
       </React.Fragment>}
