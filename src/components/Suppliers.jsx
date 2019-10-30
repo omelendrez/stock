@@ -4,7 +4,6 @@ import { getStatus } from './../services/status'
 import { getCompanies } from './../services/companies'
 import Table from './common/Table'
 import Form from './common/Form'
-import { deleteStore } from '../services/stores'
 
 const Suppliers = () => {
   const defaultSupplier = {

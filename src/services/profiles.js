@@ -1,3 +1,4 @@
+// npx sequelize-cli model:generate --name profile --attributes code:string,name:string
 const profiles = [
   {
     id: 1,

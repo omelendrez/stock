@@ -1,3 +1,4 @@
+// npx sequelize-cli model:generate --name product --attributes code:string,name:string,categoryId:integer,minimum:integer,lastPurchaseDate:date,lastPurchasePrice:decimal,lastSaleDate:date,lastSalePrice:decimal,price:decimal,statusId:integer
 const products = [
   {
     code: 'P-0001',

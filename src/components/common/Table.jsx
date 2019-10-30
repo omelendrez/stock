@@ -22,12 +22,12 @@ const Table = ({ title, records, editRecord, deleteRecord }) => {
       (i, index) => index >= recordFrom && index <= recordTo
     )
     setPageItems(recordsToShow)
-  }, [pageState])
+  }, [records, pageState])
 
   return (
-    pageItems.length && <div className="table-responsive">
+    <div className="table-responsive">
       <Header title={title} />
-      <table className="table table-sm">
+      {pageItems.length > 0 && <table className="table table-sm">
         <thead className="thead-light">
           <tr>
             <Headers record={pageItems[0]} />
@@ -37,7 +37,7 @@ const Table = ({ title, records, editRecord, deleteRecord }) => {
         <tbody>
           <Body records={pageItems} editRecord={editRecord} deleteRecord={deleteRecord} />
         </tbody>
-      </table>
+      </table>}
       <Pagination
         setPage={setPage}
         pageState={pageState}
