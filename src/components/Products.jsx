@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { getProducts, saveProduct } from './../services/products'
+import { getProducts, saveProduct, deleteProduct } from './../services/products'
 import { getCategories } from './../services/categories'
 import { getCompanies } from './../services/companies'
 import { getUnits } from './../services/units'
@@ -69,6 +69,10 @@ const Products = () => {
     setShowForm(false)
   }
 
+  const deleteRecord = product => {
+    deleteProduct(product)
+  }
+
   const { code, name, categoryId, unitId, minimum, price, vat, companyId, statusId } = product
 
   return (
@@ -78,6 +82,7 @@ const Products = () => {
           title="Products"
           records={products}
           editRecord={editRecord}
+          deleteRecord={deleteRecord}
         />}
         <button className="btn btn-primary m-2" onClick={e => addRecord(e)}>Add Product</button>
       </React.Fragment>}
@@ -139,7 +144,7 @@ const Products = () => {
 
         </Form>
       }
-    </React.Fragment>
+    </React.Fragment >
   )
 }
 

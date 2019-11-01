@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { getCustomers, saveCustomer } from './../services/customers'
+import { getCustomers, saveCustomer, deleteCustomer } from './../services/customers'
 import { getCompanies } from './../services/companies'
 import { getStatus } from './../services/status'
 import Table from './common/Table'
@@ -62,6 +62,10 @@ const Customers = () => {
     setCustomer(newCustomer)
   }
 
+  const deleteRecord = customer => {
+    deleteCustomer(customer)
+  }
+
   const { code, name, address, phone, email, contact, vat, companyId, statusId } = customer
 
   return (
@@ -71,6 +75,7 @@ const Customers = () => {
           title="Customers"
           records={customers}
           editRecord={editRecord}
+          deleteRecord={deleteRecord}
         />}
         <button className="btn btn-primary m-2" onClick={e => addRecord(e)}>Add Customer</button>
       </React.Fragment>}
@@ -108,7 +113,7 @@ const Customers = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="vat">Vat</label>
+            <label htmlFor="vat">V.A.T</label>
             <input type="text" id="vat" className="form-control" value={vat} onChange={e => updateForm(e)} />
           </div>
 
