@@ -1,3 +1,4 @@
+// npx sequelize-cli model:generate --name Unit --attributes code:string,name:string,companyId:string
 const units = [
   {
     id: 1,

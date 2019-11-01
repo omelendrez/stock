@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { getUnits, saveUnit } from './../services/units'
+import { getUnits, saveUnit, deleteUnit } from './../services/units'
 import { getCompanies } from './../services/companies'
 import Table from './common/Table'
 import Form from './common/Form'
@@ -52,6 +52,10 @@ const Units = () => {
     setShowForm(true)
   }
 
+  const deleteRecord = unit => {
+    deleteUnit(unit)
+  }
+
   const { code, name, companyId } = unit
 
   return (
@@ -61,6 +65,7 @@ const Units = () => {
           title="Units"
           records={units}
           editRecord={editRecord}
+          deleteRecord={deleteRecord}
         />}
         <button className="btn btn-primary m-2" onClick={e => addRecord(e)}>Add Unit</button>
       </React.Fragment>}

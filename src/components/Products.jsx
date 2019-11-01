@@ -73,7 +73,7 @@ const Products = () => {
     deleteProduct(product)
   }
 
-  const { code, name, categoryId, unitId, minimum, price, companyId, statusId } = products
+  const { code, name, categoryId, unitId, minimum, price, vat, companyId, statusId } = product
 
   return (
     <React.Fragment>
@@ -115,14 +115,19 @@ const Products = () => {
 
           <div className="form-group">
             <label htmlFor="minimum">Minimum</label>
-            <input type="number" id="code" className="form-control" value={minimum} onChange={e => updateForm(e)} />
+            <input type="number" id="minimum" className="form-control" value={minimum} onChange={e => updateForm(e)} />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="vat">V.A.T.</label>
+            <input type="number" id="vat" className="form-control" value={vat} onChange={e => updateForm(e)} />
           </div>
 
           <div className="form-group">
             <label htmlFor="price">Price</label>
             <input type="number" id="price" className="form-control" value={price} onChange={e => updateForm(e)} />
           </div>
-          
+
           <div className="form-group">
             <label htmlFor="companyId">Company</label>
             <select className="form-control" id="companyId" value={companyId} onChange={e => updateForm(e)}>
@@ -139,7 +144,7 @@ const Products = () => {
 
         </Form>
       }
-    </React.Fragment>
+    </React.Fragment >
   )
 }
 

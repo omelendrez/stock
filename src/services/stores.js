@@ -1,3 +1,4 @@
+// npx sequelize-cli model:generate --name store --attributes code:string,name:string,companyId:integer,statusId:integer
 const stores = [
   {
     id: 1,

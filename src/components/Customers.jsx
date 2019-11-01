@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { getCustomers , saveCustomer, deleteCustomer } from './../services/customers'
+import { getCustomers, saveCustomer, deleteCustomer } from './../services/customers'
 import { getCompanies } from './../services/companies'
 import { getStatus } from './../services/status'
 import Table from './common/Table'
@@ -104,7 +104,7 @@ const Customers = () => {
 
           <div className="form-group">
             <label htmlFor="email">Email</label>
-            <input type="text" id="email" className="form-control" value={email} onChange={e => updateForm(e)} />
+            <input type="email" id="email" className="form-control" value={email} onChange={e => updateForm(e)} />
           </div>
 
           <div className="form-group">

@@ -1,3 +1,4 @@
+// npx sequelize-cli model:generate --name category --attributes code:string,name:string,companyId:integer
 const categories = [
   {
     id: 1,

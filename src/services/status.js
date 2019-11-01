@@ -1,3 +1,4 @@
+// npx sequelize-cli model:generate --name status --attributes code:string,name:string
 const status = [
   {
     id: 1,

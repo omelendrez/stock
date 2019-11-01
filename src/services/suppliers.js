@@ -1,3 +1,5 @@
+// npx sequelize-cli model:generate --name supplier --attributes code:string,name:string,phoneNumber:string,address:string,contact:string,companyId:integer,statusId:integer
+
 const suppliers = [
   {
     id: 1,

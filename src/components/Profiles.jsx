@@ -5,14 +5,13 @@ import Form from './common/Form'
 
 const Profiles = () => {
   const defaultProfile = {
-  id: -1,
-  code: "",
-  name: ""
-}
+    id: -1,
+    code: "",
+    name: ""
+  }
   const [profile, setProfile] = useState(defaultProfile)
   const [profiles, setProfiles] = useState([])
   const [showForm, setShowForm] = useState(false)
-  
   useEffect(() => {
     const profiles = getProfiles()
     setProfiles(profiles)
@@ -32,18 +31,18 @@ const Profiles = () => {
 
   const cancel = e => {
     e.preventDefault()
-    setProfiles(defaultProfile)
+    setProfile(defaultProfile)
     setShowForm(false)
   }
 
   const updateForm = e => {
     e.preventDefault()
-    const newProfile = { ...profiles, [e.target.id]: e.target.value }
-    setProfiles(newProfile)
+    const newProfile = { ...profile, [e.target.id]: e.target.value }
+    setProfile(newProfile)
   }
 
   const editRecord = profile => {
-    setProfiles(profile)
+    setProfile(profile)
     setShowForm(true)
   }
 
@@ -51,7 +50,7 @@ const Profiles = () => {
     deleteProfile(profile)
   }
 
-  const { code, name } = profiles
+  const { code, name } = profile
 
   return (
     <React.Fragment>

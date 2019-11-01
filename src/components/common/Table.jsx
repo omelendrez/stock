@@ -22,12 +22,12 @@ const Table = ({ title, records, editRecord, deleteRecord }) => {
       (i, index) => index >= recordFrom && index <= recordTo
     )
     setPageItems(recordsToShow)
-  }, [pageState])
+  }, [records, pageState])
 
   return (
-    pageItems.length && <div className="table-responsive">
+    <div className="table-responsive">
       <Header title={title} />
-      <table className="table table-sm">
+      {pageItems.length > 0 && <table className="table table-sm">
         <thead className="thead-light">
           <tr>
             <Headers record={pageItems[0]} />
@@ -37,7 +37,7 @@ const Table = ({ title, records, editRecord, deleteRecord }) => {
         <tbody>
           <Body records={pageItems} editRecord={editRecord} deleteRecord={deleteRecord} />
         </tbody>
-      </table>
+      </table>}
       <Pagination
         setPage={setPage}
         pageState={pageState}
@@ -48,7 +48,7 @@ const Table = ({ title, records, editRecord, deleteRecord }) => {
   )
 }
 
-const Headers = ({ record }) => Object.keys(record).map((field, index) => <th className="text-uppercase" key={index}>{field.replace(/_/g, ' ')}</th>)
+const Headers = ({ record }) => Object.keys(record).map((field, index) => <th className="text-uppercase small" key={index}>{field.replace(/_/g, ' ')}</th>)
 
 const Body = ({ records, editRecord, deleteRecord }) => records.map((record, index) => (<tr key={index}><Row record={record} /><Buttons record={record} editRecord={editRecord} deleteRecord={deleteRecord} /></tr>))
 

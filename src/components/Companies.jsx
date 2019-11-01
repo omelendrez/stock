@@ -6,7 +6,7 @@ import Form from './common/Form'
 
 const Companies = () => {
   const defaultCompany = {
-    id: -1,
+    id: null,
     code: "",
     name: "",
     statusId: "1",
@@ -17,21 +17,26 @@ const Companies = () => {
   const [company, setCompany] = useState(defaultCompany)
 
   useEffect(() => {
-    const companies = getCompanies()
-    setCompanies(companies)
+    fetchData()
+  }, [])
+
+  const fetchData = async () => {
     const status = getStatus()
     setStatus(status)
-  }, [])
+    const companies = await getCompanies()
+    setCompanies(companies)
+  }
 
   const addRecord = e => {
     e.preventDefault()
+    setCompany(defaultCompany)
     setShowForm(true)
   }
 
-  const save = e => {
+  const save = async e => {
     e.preventDefault()
-    saveCompany(company)
-    setCompany(defaultCompany)
+    await saveCompany(company)
+    fetchData()
     setShowForm(false)
   }
 
@@ -52,8 +57,9 @@ const Companies = () => {
     setShowForm(true)
   }
 
-  const deleteRecord = company => {
-    deleteCompany(company)
+  const deleteRecord = async company => {
+    await deleteCompany(company)
+    fetchData()
   }
 
   const { code, name, statusId } = company
@@ -61,12 +67,12 @@ const Companies = () => {
   return (
     <React.Fragment>
       {!showForm && <React.Fragment>
-        {companies.length && <Table
+        <Table
           title="Companies"
           records={companies}
           editRecord={editRecord}
           deleteRecord={deleteRecord}
-        />}
+        />
         <button className="btn btn-primary m-2" onClick={e => addRecord(e)}>Add Company</button>
       </React.Fragment>}
       {showForm &&
