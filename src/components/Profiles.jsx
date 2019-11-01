@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { getProfiles, saveProfile } from './../services/profiles'
-import { getStatus } from './../services/status'
+import { getProfiles, saveProfile, deleteProfile } from './../services/profiles'
 import Table from './common/Table'
 import Form from './common/Form'
 
@@ -13,13 +12,10 @@ const Profiles = () => {
   const [profile, setProfile] = useState(defaultProfile)
   const [profiles, setProfiles] = useState([])
   const [showForm, setShowForm] = useState(false)
-  const [status, setStatus] = useState([])
-
+  
   useEffect(() => {
     const profiles = getProfiles()
     setProfiles(profiles)
-    const status = getStatus()
-    setStatus(status)
   }, [])
 
   const addRecord = e => {
@@ -51,6 +47,10 @@ const Profiles = () => {
     setShowForm(true)
   }
 
+  const deleteRecord = profile => {
+    deleteProfile(profile)
+  }
+
   const { code, name } = profiles
 
   return (
@@ -60,6 +60,7 @@ const Profiles = () => {
           title="Profiles"
           records={profiles}
           editRecord={editRecord}
+          deleteRecord={deleteRecord}
         />}
         <button className="btn btn-primary m-2" onClick={e => addRecord(e)}>Add Profile</button>
       </React.Fragment>}
@@ -67,13 +68,13 @@ const Profiles = () => {
         <Form title="Profiles" save={save} cancel={cancel}>
 
           <div className="form-group">
-            <label for="code">Code</label>
-            <input type="text" id="code" className="form-control" />
+            <label htmlFor="code">Code</label>
+            <input type="text" id="code" className="form-control" value={code} onChange={e => updateForm(e)} />
           </div>
 
           <div className="form-group">
-            <label for="name">Name</label>
-            <input type="text" id="name" className="form-control" />
+            <label htmlFor="name">Name</label>
+            <input type="text" id="name" className="form-control" value={name} onChange={e => updateForm(e)} />
           </div>
 
         </Form>

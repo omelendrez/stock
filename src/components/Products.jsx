@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { getProducts, saveProduct } from './../services/products'
+import { getProducts, saveProduct, deleteProduct } from './../services/products'
 import { getCategories } from './../services/categories'
 import { getCompanies } from './../services/companies'
 import { getUnits } from './../services/units'
@@ -69,7 +69,11 @@ const Products = () => {
     setShowForm(false)
   }
 
-  const { code, name, categoryId, unitId, minimum, price, vat, companyId, statusId } = products
+  const deleteRecord = product => {
+    deleteProduct(product)
+  }
+
+  const { code, name, categoryId, unitId, minimum, price, companyId, statusId } = products
 
   return (
     <React.Fragment>
@@ -78,6 +82,7 @@ const Products = () => {
           title="Products"
           records={products}
           editRecord={editRecord}
+          deleteRecord={deleteRecord}
         />}
         <button className="btn btn-primary m-2" onClick={e => addRecord(e)}>Add Product</button>
       </React.Fragment>}
@@ -85,50 +90,50 @@ const Products = () => {
         <Form title="Products" save={save} cancel={cancel}>
 
           <div className="form-group">
-            <label for="code">Code</label>
-            <input type="text" id="code" className="form-control" />
+            <label htmlFor="code">Code</label>
+            <input type="text" id="code" className="form-control" value={code} onChange={e => updateForm(e)} />
           </div>
 
           <div className="form-group">
-            <label for="name">Name</label>
-            <input type="text" id="name" className="form-control" />
+            <label htmlFor="name">Name</label>
+            <input type="text" id="name" className="form-control" value={name} onChange={e => updateForm(e)} />
           </div>
 
-          <div class="form-group">
-            <label for="categoryId">Category</label>
-            <select className="form-control" id="categoryId">
-              {categories.map(st => <option value={st.id}>{st.name}</option>)}
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="unitId">Unit</label>
-            <select className="form-control" id="unitId">
-              {units.map(st => <option value={st.id}>{st.name}</option>)}
+          <div className="form-group">
+            <label htmlFor="categoryId">Category</label>
+            <select className="form-control" id="categoryId" value={categoryId} onChange={e => updateForm(e)}>
+              {categories.map(st => <option key={st.id} value={st.id}>{st.name}</option>)}
             </select>
           </div>
 
           <div className="form-group">
-            <label for="minimum">Minimum</label>
-            <input type="number" id="minimum" className="form-control" />
-          </div>
-
-          <div className="form-group">
-            <label for="price">Price</label>
-            <input type="number" id="price" className="form-control" />
-          </div>
-
-          <div class="form-group">
-            <label for="companyId">Company</label>
-            <select className="form-control" id="companyId">
-              {companies.map(st => <option value={st.id}>{st.name}</option>)}
+            <label htmlFor="unitId">Unit</label>
+            <select className="form-control" id="unitId" value={unitId} onChange={e => updateForm(e)}>
+              {units.map(st => <option key={st.id} value={st.id}>{st.name}</option>)}
             </select>
           </div>
 
-          <div class="form-group">
-            <label for="statusId">Status</label>
-            <select className="form-control" id="statusId">
-              {status.map(st => <option value={st.id}>{st.name}</option>)}
+          <div className="form-group">
+            <label htmlFor="minimum">Minimum</label>
+            <input type="number" id="code" className="form-control" value={minimum} onChange={e => updateForm(e)} />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="price">Price</label>
+            <input type="number" id="price" className="form-control" value={price} onChange={e => updateForm(e)} />
+          </div>
+          
+          <div className="form-group">
+            <label htmlFor="companyId">Company</label>
+            <select className="form-control" id="companyId" value={companyId} onChange={e => updateForm(e)}>
+              {companies.map(st => <option key={st.id} value={st.id}>{st.name}</option>)}
+            </select>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="statusId">Status</label>
+            <select className="form-control" id="statusId" value={statusId} onChange={e => updateForm(e)}>
+              {status.map(st => <option key={st.id} value={st.id}>{st.name}</option>)}
             </select>
           </div>
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { getCustomers , saveCustomer } from './../services/customers'
+import { getCustomers , saveCustomer, deleteCustomer } from './../services/customers'
 import { getCompanies } from './../services/companies'
 import { getStatus } from './../services/status'
 import Table from './common/Table'
@@ -41,6 +41,8 @@ const Customers = () => {
 
   const save = e => {
     e.preventDefault()
+    saveCustomer(customer)
+    setCustomer(defaultCustomer)
     setShowForm(false)
   }
 
@@ -60,6 +62,10 @@ const Customers = () => {
     setCustomer(newCustomer)
   }
 
+  const deleteRecord = customer => {
+    deleteCustomer(customer)
+  }
+
   const { code, name, address, phone, email, contact, vat, companyId, statusId } = customer
 
   return (
@@ -69,6 +75,7 @@ const Customers = () => {
           title="Customers"
           records={customers}
           editRecord={editRecord}
+          deleteRecord={deleteRecord}
         />}
         <button className="btn btn-primary m-2" onClick={e => addRecord(e)}>Add Customer</button>
       </React.Fragment>}
@@ -76,51 +83,51 @@ const Customers = () => {
         <Form title="Customers" save={save} cancel={cancel}>
 
           <div className="form-group">
-            <label for="code">Code</label>
-            <input type="text" id="code" className="form-control" />
+            <label htmlFor="code">Code</label>
+            <input type="text" id="code" className="form-control" value={code} onChange={e => updateForm(e)} />
           </div>
 
           <div className="form-group">
-            <label for="name">Name</label>
-            <input type="text" id="name" className="form-control" />
+            <label htmlFor="name">Name</label>
+            <input type="text" id="name" className="form-control" value={name} onChange={e => updateForm(e)} />
           </div>
 
           <div className="form-group">
-            <label for="address">Address</label>
-            <input type="text" id="address" className="form-control" />
+            <label htmlFor="address">Address</label>
+            <input type="text" id="address" className="form-control" value={address} onChange={e => updateForm(e)} />
           </div>
 
           <div className="form-group">
-            <label for="phone">Phone</label>
-            <input type="text" id="phone" className="form-control" />
+            <label htmlFor="phone">Phone</label>
+            <input type="text" id="phone" className="form-control" value={phone} onChange={e => updateForm(e)} />
           </div>
 
           <div className="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" className="form-control" />
+            <label htmlFor="email">Email</label>
+            <input type="text" id="email" className="form-control" value={email} onChange={e => updateForm(e)} />
           </div>
 
           <div className="form-group">
-            <label for="contact">Contact</label>
-            <input type="text" id="contact" className="form-control" />
+            <label htmlFor="contact">Contact</label>
+            <input type="text" id="contact" className="form-control" value={contact} onChange={e => updateForm(e)} />
           </div>
 
           <div className="form-group">
-            <label for="vat">Vat</label>
-            <input type="text" id="vat" className="form-control" />
+            <label htmlFor="vat">V.A.T</label>
+            <input type="text" id="vat" className="form-control" value={vat} onChange={e => updateForm(e)} />
           </div>
 
-          <div class="form-group">
-            <label for="companyId">Company</label>
-            <select className="form-control" id="companyId">
-              {companies.map(st => <option value={st.id}>{st.name}</option>)}
+          <div className="form-group">
+            <label htmlFor="companyId">Company</label>
+            <select className="form-control" id="companyId" value={companyId} onChange={e => updateForm(e)}>
+              {companies.map(st => <option key={st.id} value={st.id}>{st.name}</option>)}
             </select>
           </div>
 
-          <div class="form-group">
-            <label for="statusId">Status</label>
-            <select className="form-control" id="statusId">
-              {status.map(st => <option value={st.id}>{st.name}</option>)}
+          <div className="form-group">
+            <label htmlFor="statusId">Status</label>
+            <select className="form-control" id="statusId" value={statusId} onChange={e => updateForm(e)}>
+              {status.map(st => <option key={st.id} value={st.id}>{st.name}</option>)}
             </select>
           </div>
 
