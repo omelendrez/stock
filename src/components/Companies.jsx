@@ -23,7 +23,7 @@ const Companies = () => {
 
   // TODO
   const fetchData = async () => {
-    const status = getStatus()
+    const status = await getStatus()
     setStatus(status)
     const companies = await getCompanies()
     setCompanies(companies)

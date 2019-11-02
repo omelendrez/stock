@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Header from './Header'
+import { hiddenTableFields } from '../../helpers'
 
 const Table = ({ title, records, editRecord, deleteRecord }) => {
   const pagination = {
@@ -48,11 +49,12 @@ const Table = ({ title, records, editRecord, deleteRecord }) => {
   )
 }
 
-const Headers = ({ record }) => Object.keys(record).map((field, index) => <th className="text-uppercase small" key={index}>{field.replace(/_/g, ' ')}</th>)
+
+const Headers = ({ record }) => Object.keys(record).map((field, index) => hiddenTableFields.indexOf(field) !== -1 ? null : <th className="text-uppercase small" key={index}>{field.replace(/_/g, ' ')}</th>)
 
 const Body = ({ records, editRecord, deleteRecord }) => records.map((record, index) => (<tr key={index}><Row record={record} /><Buttons record={record} editRecord={editRecord} deleteRecord={deleteRecord} /></tr>))
 
-const Row = ({ record }) => Object.keys(record).map((field, index) => <td key={index}>{record[field]}</td>)
+const Row = ({ record }) => Object.keys(record).map((field, index) => hiddenTableFields.indexOf(field) !== -1 ? null : <td key={index}>{record[field]}</td>)
 
 const Buttons = ({ record, editRecord, deleteRecord }) => (
   <td>
