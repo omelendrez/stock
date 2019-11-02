@@ -1,67 +1,29 @@
-// npx sequelize-cli model:generate --name Unit --attributes code:string,name:string,companyId:string
-const units = [
-  {
-    id: 1,
-    code: 'BG',
-    name: 'Bag',
-    companyId: 'Veterinaria Colitas Felices'
-  },
-  {
-    id: 2,
-    code: 'BT',
-    name: 'Bottle',
-    companyId: 'Veterinaria Colitas Felices'
-  },
-  {
-    id: 3,
-    code: 'BX',
-    name: 'Box',
-    companyId: 'Veterinaria Colitas Felices'
-  },
-  {
-    id: 5,
-    code: 'EA',
-    name: 'Each',
-    companyId: 'Veterinaria Colitas Felices'
-  },
-  {
-    id: 6,
-    code: 'KG',
-    name: 'Kilogram',
-    companyId: 'Veterinaria Colitas Felices'
-  },
-  {
-    id: 7,
-    code: 'PC',
-    name: 'Piece',
-    companyId: 'Veterinaria Colitas Felices'
-  },
-  {
-    id: 8,
-    code: 'UN',
-    name: 'Unit',
-    companyId: 'Veterinaria Colitas Felices'
-  },
-  {
-    id: 9,
-    code: 'ML',
-    name: 'Millilitre',
-    companyId: 'Veterinaria Colitas Felices'
-  },
-  {
-    id: 10,
-    code: 'BL',
-    name: 'Blister',
-    companyId: 'Veterinaria Colitas Felices'
-  },
-  {
-    id: 11,
-    code: 'CO',
-    name: 'Comprimido',
-    companyId: 'Veterinaria Colitas Felices'
-  }
-]
+import http from './api'
 
-export const getUnits = () => units
-export const saveUnit = unit => console.log(unit)
-export const deleteUnit = unit => console.log(unit)
+export const getUnits = async () => {
+  const response = await http.get('/units')
+  return response.data.units
+}
+
+export const saveUnit = unit => {
+  return new Promise((resolve, reject) => {
+    http.post('/units', unit)
+      .then(response => {
+        resolve(response.data)
+      })
+      .catch(error => reject(error))
+  })
+}
+
+export const deleteUnit = unit => {
+  return new Promise((resolve, reject) => {
+    const { id } = unit
+    http.delete(`/units/${id}`)
+      .then(response => {
+        resolve(response.data)
+      })
+      .catch(error => reject(error))
+  })
+}
+
+
