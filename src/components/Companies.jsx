@@ -16,10 +16,12 @@ const Companies = () => {
   const [status, setStatus] = useState([])
   const [company, setCompany] = useState(defaultCompany)
 
+  // TODO
   useEffect(() => {
     fetchData()
   }, [])
 
+  // TODO
   const fetchData = async () => {
     const status = getStatus()
     setStatus(status)
@@ -33,6 +35,7 @@ const Companies = () => {
     setShowForm(true)
   }
 
+  // TODO
   const save = async e => {
     e.preventDefault()
     await saveCompany(company)
@@ -56,6 +59,7 @@ const Companies = () => {
     setShowForm(true)
   }
 
+  // TODO
   const deleteRecord = async company => {
     await deleteCompany(company)
     fetchData()
