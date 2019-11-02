@@ -25,13 +25,13 @@ const Units = () => {
 
   const addRecord = e => {
     e.preventDefault()
+    setUnit(defaultUnit)
     setShowForm(true)
   }
 
   const save = e => {
     e.preventDefault()
     saveUnit(unit)
-    setUnit(defaultUnit)
     setShowForm(false)
   }
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { getCategories, saveCategory, deleteCategory  } from './../services/categories'
+import { getCategories, saveCategory, deleteCategory } from './../services/categories'
 import { getCompanies } from './../services/companies'
 import Table from './common/Table'
 import Form from './common/Form'
@@ -26,13 +26,13 @@ const Categories = () => {
 
   const addRecord = e => {
     e.preventDefault()
+    setCategory(defaultCategory)
     setShowForm(true)
   }
 
   const save = e => {
     e.preventDefault()
     saveCategory(category)
-    setCategory(defaultCategory)
     setShowForm(false)
   }
 

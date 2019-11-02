@@ -33,19 +33,18 @@ const Suppliers = () => {
 
   const addRecord = e => {
     e.preventDefault()
+    setSupplier(defaultSupplier)
     setShowForm(true)
   }
 
   const save = e => {
     e.preventDefault()
     saveSupplier(supplier)
-    setSupplier(defaultSupplier)
     setShowForm(false)
   }
 
   const cancel = e => {
     e.preventDefault()
-    setSupplier(defaultSupplier)
     setShowForm(false)
   }
 

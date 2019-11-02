@@ -36,13 +36,13 @@ const Customers = () => {
 
   const addRecord = e => {
     e.preventDefault()
+    setCustomer(defaultCustomer)
     setShowForm(true)
   }
 
   const save = e => {
     e.preventDefault()
     saveCustomer(customer)
-    setCustomer(defaultCustomer)
     setShowForm(false)
   }
 

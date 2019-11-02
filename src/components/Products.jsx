@@ -43,13 +43,13 @@ const Products = () => {
 
   const addRecord = e => {
     e.preventDefault()
+    setProduct(defaultProduct)
     setShowForm(true)
   }
 
   const save = e => {
     e.preventDefault()
     saveProduct(product)
-    setProduct(defaultProduct)
     setShowForm(false)
   }
 

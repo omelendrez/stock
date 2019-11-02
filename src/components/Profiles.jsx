@@ -19,19 +19,18 @@ const Profiles = () => {
 
   const addRecord = e => {
     e.preventDefault()
+    setProfile(defaultProfile)
     setShowForm(true)
   }
 
   const save = e => {
     e.preventDefault()
     saveProfile(profile)
-    setProfile(defaultProfile)
     setShowForm(false)
   }
 
   const cancel = e => {
     e.preventDefault()
-    setProfile(defaultProfile)
     setShowForm(false)
   }
 

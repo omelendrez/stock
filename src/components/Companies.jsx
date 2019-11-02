@@ -42,7 +42,6 @@ const Companies = () => {
 
   const cancel = e => {
     e.preventDefault()
-    setCompany(defaultCompany)
     setShowForm(false)
   }
 

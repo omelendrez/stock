@@ -36,19 +36,18 @@ const Users = () => {
 
   const addRecord = e => {
     e.preventDefault()
+    setUser(defaultUser)
     setShowForm(true)
   }
 
   const save = e => {
     e.preventDefault()
     saveUser(user)
-    setUser(defaultUser)
     setShowForm(false)
   }
 
   const cancel = e => {
     e.preventDefault()
-    setUser(defaultUser)
     setShowForm(false)
   }
 

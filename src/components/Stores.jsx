@@ -30,19 +30,18 @@ const Stores = () => {
 
   const addRecord = e => {
     e.preventDefault()
+    setStore(defaultStore)
     setShowForm(true)
   }
 
   const save = e => {
     e.preventDefault()
     saveStore(store)
-    setStore(defaultStore)
     setShowForm(false)
   }
 
   const cancel = e => {
     e.preventDefault()
-    setStore(defaultStore)
     setShowForm(false)
   }
 
