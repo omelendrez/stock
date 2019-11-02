@@ -1,14 +1,27 @@
-// npx sequelize-cli model:generate --name store --attributes code:string,name:string,companyId:integer,statusId:integer
-const stores = [
-  {
-    id: 1,
-    code: '01',
-    name: 'Store 1',
-    companyId: 'Veterinaria Colitas Felices',
-    statusId: 'Active'
-  }
-]
+import http from './api'
 
-export const getStores = () => stores
-export const saveStore = store => console.log(store)
-export const deleteStore = store => console.log(store)
+export const getStores = async () => {
+  const response = await http.get('/stores')
+  return response.data.stores
+}
+
+export const saveStore = store => {
+  return new Promise((resolve, reject) => {
+    http.post('/stores', store)
+      .then(response => {
+        resolve(response.data)
+      })
+      .catch(error => reject(error))
+  })
+}
+
+export const deleteStore = store => {
+  return new Promise((resolve, reject) => {
+    const { id } = store
+    http.delete(`/stores/${id}`)
+      .then(response => {
+        resolve(response.data)
+      })
+      .catch(error => reject(error))
+  })
+}
