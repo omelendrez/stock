@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { getCompanies, saveCompany, deleteCompany } from './../services/companies'
 import { getStatus } from './../services/status'
 import Table from './common/Table'
@@ -7,7 +7,8 @@ import Form from './common/Form'
 import Alert from './common/Alert'
 
 const Companies = () => {
-  let timeout = 0
+  // TODO
+  let timeout = useRef(0)
   const defaultCompany = {
     id: null,
     code: "",
@@ -26,11 +27,13 @@ const Companies = () => {
 
   // TODO
   useEffect(() => {
-    const delay = response.success ? 3000 : 10000
-    clearTimeout(timeout)
-    timeout = setTimeout(() => {
-      setResponse({})
-    }, delay)
+    clearTimeout(timeout.current)
+    timeout.current = setTimeout(() => {
+      if (response.success) {
+        setResponse({})
+        setShowForm(false)
+      }
+    }, 2000)
   }, [response])
 
   const fetchData = async () => {
@@ -53,7 +56,6 @@ const Companies = () => {
       .then(data => {
         setResponse(data)
         fetchData()
-        setShowForm(false)
       })
       .catch(err => setResponse(err.response.data))
   }
