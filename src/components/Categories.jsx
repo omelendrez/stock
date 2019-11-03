@@ -9,7 +9,7 @@ const Categories = () => {
     id: -1,
     code: "",
     name: "",
-    companyId: "1",
+    companyId: 1,
   }
 
   const [category, setCategory] = useState(defaultCategory)

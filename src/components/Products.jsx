@@ -9,14 +9,14 @@ import Form from './common/Form'
 
 const Products = () => {
   const defaultProduct = {
-    id: -1,
+    id: null,
     code: "",
     name: "",
-    categoryId: "",
-    unitId: "",
+    categoryId: 1,
+    unitId: 1,
     minimum: 0,
     price: 0,
-    companyId: "",
+    companyId: 1,
     statusId: 1
   }
 

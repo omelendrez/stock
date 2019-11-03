@@ -15,7 +15,7 @@ const Customers = () => {
     email: "",
     contact: "",
     vat: 0,
-    companyId: "",
+    companyId: 1,
     statusId: 1
   }
 

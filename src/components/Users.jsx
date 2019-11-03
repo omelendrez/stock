@@ -12,9 +12,9 @@ const Users = () => {
     userName: "",
     email: "",
     fullName: "",
-    profileId: "",
-    companyId: "",
-    statusId: "",
+    profileId: 1,
+    companyId: 1,
+    statusId: 1,
   }
   const [users, setUsers] = useState([])
   const [showForm, setShowForm] = useState(false)

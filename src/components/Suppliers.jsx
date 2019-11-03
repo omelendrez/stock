@@ -13,8 +13,8 @@ const Suppliers = () => {
     phoneNumber: "",
     address: "",
     contact: "",
-    companyId: "",
-    statusId: "1",
+    companyId: 1,
+    statusId: 1,
   }
   const [suppliers, setSuppliers] = useState([])
   const [showForm, setShowForm] = useState(false)

@@ -10,8 +10,8 @@ const Stores = () => {
     id: null,
     code: "",
     name: "",
-    companyId: "",
-    statusId: "1",
+    companyId: 1,
+    statusId: 1,
   }
   const [stores, setStores] = useState([])
   const [showForm, setShowForm] = useState(false)
@@ -95,7 +95,7 @@ const Stores = () => {
           <div className="form-group">
             <label htmlFor="companyId">Company</label>
             <select className="form-control" id="companyId" value={companyId} onChange={e => updateForm(e)} >
-              {companies.map(st => <option key={st.id} alue={st.id}>{st.name}</option>)}
+              {companies.map(st => <option key={st.id} value={st.id}>{st.name}</option>)}
             </select>
           </div>
 

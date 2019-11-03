@@ -5,7 +5,7 @@ import Form from './common/Form'
 
 const Profiles = () => {
   const defaultProfile = {
-    id: -1,
+    id: null,
     code: "",
     name: ""
   }
