@@ -7,7 +7,7 @@ import Form from './common/Form'
 
 const Suppliers = () => {
   const defaultSupplier = {
-    id: -1,
+    id: null,
     code: "",
     name: "",
     phoneNumber: "",
@@ -23,13 +23,17 @@ const Suppliers = () => {
   const [supplier, setSupplier] = useState(defaultSupplier)
 
   useEffect(() => {
-    const suppliers = getSuppliers()
-    setSuppliers(suppliers)
-    const status = getStatus()
-    setStatus(status)
-    const companies = getCompanies()
-    setCompanies(companies)
+    fetchData()
   }, [])
+
+  const fetchData = async () => {
+    const suppliers = await getSuppliers()
+    setSuppliers(suppliers)
+    const status = await getStatus()
+    setStatus(status)
+    const companies = await getCompanies()
+    setCompanies(companies)
+  }
 
   const addRecord = e => {
     e.preventDefault()
@@ -37,9 +41,10 @@ const Suppliers = () => {
     setShowForm(true)
   }
 
-  const save = e => {
+  const save = async e => {
     e.preventDefault()
-    saveSupplier(supplier)
+    await saveSupplier(supplier)
+    fetchData()
     setShowForm(false)
   }
 
@@ -59,8 +64,9 @@ const Suppliers = () => {
     setShowForm(true)
   }
 
-  const deleteRecord = supplier => {
-    deleteSupplier(supplier)
+  const deleteRecord = async supplier => {
+    await deleteSupplier(supplier)
+    fetchData()
   }
 
   const { code, name, phoneNumber, address, contact, companyId, statusId } = supplier

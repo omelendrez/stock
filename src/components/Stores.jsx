@@ -7,7 +7,7 @@ import Form from './common/Form'
 
 const Stores = () => {
   const defaultStore = {
-    id: -1,
+    id: null,
     code: "",
     name: "",
     companyId: "",
@@ -20,13 +20,17 @@ const Stores = () => {
   const [store, setStore] = useState(defaultStore)
 
   useEffect(() => {
-    const stores = getStores()
-    setStores(stores)
-    const status = getStatus()
-    setStatus(status)
-    const companies = getCompanies()
-    setCompanies(companies)
+    fetchData()
   }, [])
+
+  const fetchData = async () => {
+    const stores = await getStores()
+    setStores(stores)
+    const status = await getStatus()
+    setStatus(status)
+    const companies = await getCompanies()
+    setCompanies(companies)
+  }
 
   const addRecord = e => {
     e.preventDefault()
@@ -34,9 +38,10 @@ const Stores = () => {
     setShowForm(true)
   }
 
-  const save = e => {
+  const save = async e => {
     e.preventDefault()
-    saveStore(store)
+    await saveStore(store)
+    fetchData()
     setShowForm(false)
   }
 
@@ -56,8 +61,9 @@ const Stores = () => {
     setShowForm(true)
   }
 
-  const deleteRecord = store => {
-    deleteStore(store)
+  const deleteRecord = async store => {
+    await deleteStore(store)
+    fetchData()
   }
 
   const { code, name, companyId, statusId } = store
