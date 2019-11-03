@@ -8,7 +8,7 @@ import Form from './common/Form'
 
 const Users = () => {
   const defaultUser = {
-    id: -1,
+    id: null,
     userName: "",
     email: "",
     fullName: "",
@@ -24,15 +24,19 @@ const Users = () => {
   const [user, setUser] = useState(defaultUser)
 
   useEffect(() => {
-    const users = getUsers()
-    setUsers(users)
-    const status = getStatus()
-    setStatus(status)
-    const companies = getCompanies()
-    setCompanies(companies)
-    const profiles = getProfiles()
-    setProfiles(profiles)
+    fetchData()
   }, [])
+
+  const fetchData = async () => {
+    const users = await getUsers()
+    setUsers(users)
+    const status = await getStatus()
+    setStatus(status)
+    const companies = await getCompanies()
+    setCompanies(companies)
+    const profiles = await getProfiles()
+    setProfiles(profiles)
+  }
 
   const addRecord = e => {
     e.preventDefault()
@@ -40,9 +44,10 @@ const Users = () => {
     setShowForm(true)
   }
 
-  const save = e => {
+  const save = async e => {
     e.preventDefault()
-    saveUser(user)
+    await saveUser(user)
+    fetchData()
     setShowForm(false)
   }
 
@@ -62,8 +67,9 @@ const Users = () => {
     setShowForm(true)
   }
 
-  const deleteRecord = user => {
-    deleteUser(user)
+  const deleteRecord = async user => {
+    await deleteUser(user)
+    fetchData()
   }
 
   const { userName, email, fullName, profileId, companyId, statusId } = user

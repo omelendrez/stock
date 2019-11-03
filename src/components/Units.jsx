@@ -6,7 +6,7 @@ import Form from './common/Form'
 
 const Units = () => {
   const defaultUnit = {
-    id: -1,
+    id: null,
     code: "",
     name: "",
     companyId: "",
@@ -17,11 +17,15 @@ const Units = () => {
   const [unit, setUnit] = useState(defaultUnit)
 
   useEffect(() => {
-    const units = getUnits()
-    setUnits(units)
-    const companies = getCompanies()
-    setCompanies(companies)
+    fetchData()
   }, [])
+
+  const fetchData = async () => {
+    const units = await getUnits()
+    setUnits(units)
+    const companies = await getCompanies()
+    setCompanies(companies)
+  }
 
   const addRecord = e => {
     e.preventDefault()
@@ -29,15 +33,15 @@ const Units = () => {
     setShowForm(true)
   }
 
-  const save = e => {
+  const save = async e => {
     e.preventDefault()
-    saveUnit(unit)
+    await saveUnit(unit)
+    fetchData()
     setShowForm(false)
   }
 
   const cancel = e => {
     e.preventDefault()
-    setUnit(defaultUnit)
     setShowForm(false)
   }
 
@@ -52,8 +56,9 @@ const Units = () => {
     setShowForm(true)
   }
 
-  const deleteRecord = unit => {
-    deleteUnit(unit)
+  const deleteRecord = async unit => {
+    await deleteUnit(unit)
+    fetchData()
   }
 
   const { code, name, companyId } = unit

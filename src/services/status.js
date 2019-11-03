@@ -2,12 +2,12 @@ import http from './api'
 
 export const getStatus = async () => {
   const response = await http.get('/statuses')
-  return response.data.Status
+  return response.data.statuses
 }
 
-export const saveStatus = Status => {
+export const saveStatus = status => {
   return new Promise((resolve, reject) => {
-    http.post('/statuses', Status)
+    http.post('/statuses', status)
       .then(response => {
         resolve(response.data)
       })
@@ -15,9 +15,9 @@ export const saveStatus = Status => {
   })
 }
 
-export const deleteStatus = Status => {
+export const deleteStatus = status => {
   return new Promise((resolve, reject) => {
-    const { id } = Status
+    const { id } = status
     http.delete(`/statuses/${id}`)
       .then(response => {
         resolve(response.data)
