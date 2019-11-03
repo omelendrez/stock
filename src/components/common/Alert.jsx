@@ -7,7 +7,7 @@ const Alert = ({ response }) => {
   return (
     responseMessage ?
       (<div className={style} role="alert">
-        {responseMessage}
+        {responseMessage.replace(/Validation error: /g, "")}
         <button type="button" className="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button></div>)

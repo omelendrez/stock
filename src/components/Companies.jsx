@@ -7,6 +7,7 @@ import Form from './common/Form'
 import Alert from './common/Alert'
 
 const Companies = () => {
+  let timeout = 0
   const defaultCompany = {
     id: null,
     code: "",
@@ -26,7 +27,8 @@ const Companies = () => {
   // TODO
   useEffect(() => {
     const delay = response.success ? 3000 : 10000
-    setTimeout(() => {
+    clearTimeout(timeout)
+    timeout = setTimeout(() => {
       setResponse({})
     }, delay)
   }, [response])
