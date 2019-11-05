@@ -33,7 +33,7 @@ const Companies = () => {
         setResponse({})
         setShowForm(false)
       }
-    }, 2000)
+    }, 1000)
   }, [response])
 
   const fetchData = async () => {

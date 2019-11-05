@@ -58,7 +58,7 @@ const Row = ({ record }) => Object.keys(record).map((field, index) => hiddenTabl
 
 const Buttons = ({ record, editRecord, deleteRecord }) => (
   <td>
-    <button className="btn btn-sm btn-danger mr-3" onClick={() => deleteRecord(record)}>Delete</button>
+    <button className="btn btn-sm btn-danger mr-3" onClick={() => window.confirm('Delete record?') && deleteRecord(record)}>Delete</button>
     <button className="btn btn-sm btn-primary" onClick={() => editRecord(record)}>Edit</button>
   </td>
 )
