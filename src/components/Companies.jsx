@@ -1,3 +1,4 @@
+// TODO
 import React, { useState, useEffect, useRef } from 'react'
 import { getCompanies, saveCompany, deleteCompany } from './../services/companies'
 import { getStatus } from './../services/status'
@@ -97,6 +98,7 @@ const Companies = () => {
           editRecord={editRecord}
           deleteRecord={deleteRecord}
         />
+        {/*TODO*/}
         <Alert response={response} />
 
         <button className="btn btn-primary m-2" onClick={e => addRecord(e)}>Add Company</button>
@@ -121,11 +123,11 @@ const Companies = () => {
             </select>
           </div>
 
+          {/*TODO*/}
           <Alert response={response} />
 
         </Form>
       }
-      {/*TODO*/}
     </React.Fragment>
   )
 }
