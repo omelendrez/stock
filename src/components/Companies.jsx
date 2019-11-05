@@ -63,6 +63,7 @@ const Companies = () => {
 
   const cancel = e => {
     e.preventDefault()
+    setResponse({})
     setShowForm(false)
   }
 
