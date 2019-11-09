@@ -1,27 +1,40 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { getStores, saveStore, deleteStore } from './../services/stores'
 import { getStatus } from './../services/status'
 import { getCompanies } from './../services/companies'
 import Table from './common/Table'
 import Form from './common/Form'
+import Alert from './common/Alert'
 
 const Stores = () => {
+  let timeout = useRef(0)
   const defaultStore = {
     id: null,
     code: "",
     name: "",
-    companyId: 1,
-    statusId: 1,
+    companyId: null,
+    statusId: null,
   }
   const [stores, setStores] = useState([])
   const [showForm, setShowForm] = useState(false)
   const [status, setStatus] = useState([])
   const [companies, setCompanies] = useState([])
   const [store, setStore] = useState(defaultStore)
+  const [response, setResponse] = useState({})
 
   useEffect(() => {
     fetchData()
   }, [])
+
+  useEffect(() => {
+    clearTimeout(timeout.current)
+    timeout.current = setTimeout(() => {
+      if (response.success) {
+        setResponse({})
+        setShowForm(false)
+      }
+    }, 1000)
+  }, [response])
 
   const fetchData = async () => {
     const stores = await getStores()
@@ -38,15 +51,19 @@ const Stores = () => {
     setShowForm(true)
   }
 
-  const save = async e => {
+  const save = e => {
     e.preventDefault()
-    await saveStore(store)
-    fetchData()
-    setShowForm(false)
+    saveStore(store)
+      .then(data => {
+        setResponse(data)
+        fetchData()
+      })
+      .catch(err => setResponse(err.response.data))
   }
 
   const cancel = e => {
     e.preventDefault()
+    setResponse({})
     setShowForm(false)
   }
 
@@ -61,9 +78,13 @@ const Stores = () => {
     setShowForm(true)
   }
 
-  const deleteRecord = async store => {
-    await deleteStore(store)
-    fetchData()
+  const deleteRecord = store => {
+    deleteStore(store)
+      .then(data => {
+        setResponse(data)
+        fetchData()
+      })
+      .catch(err => setResponse(err.response.data))
   }
 
   const { code, name, companyId, statusId } = store
@@ -71,12 +92,15 @@ const Stores = () => {
   return (
     <React.Fragment>
       {!showForm && <React.Fragment>
-        {stores.length && <Table
+        <Table
           title="Stores"
           records={stores}
           editRecord={editRecord}
           deleteRecord={deleteRecord}
-        />}
+        />
+
+        <Alert response={response} />
+
         <button className="btn btn-primary m-2" onClick={e => addRecord(e)}>Add Store</button>
       </React.Fragment>}
       {showForm &&
@@ -105,6 +129,8 @@ const Stores = () => {
               {status.map(st => <option key={st.id} value={st.id}>{st.name}</option>)}
             </select>
           </div>
+
+          <Alert response={response} />
 
         </Form>
       }

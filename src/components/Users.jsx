@@ -1,20 +1,22 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { getUsers, saveUser, deleteUser } from './../services/users'
 import { getStatus } from './../services/status'
 import { getCompanies } from './../services/companies'
 import { getProfiles } from './../services/profiles'
 import Table from './common/Table'
 import Form from './common/Form'
+import Alert from './common/Alert'
 
 const Users = () => {
+  let timeout = useRef(0)
   const defaultUser = {
     id: null,
     userName: "",
     email: "",
     fullName: "",
-    profileId: 1,
-    companyId: 1,
-    statusId: 1,
+    profileId: null,
+    companyId: null,
+    statusId: null,
   }
   const [users, setUsers] = useState([])
   const [showForm, setShowForm] = useState(false)
@@ -22,10 +24,21 @@ const Users = () => {
   const [companies, setCompanies] = useState([])
   const [profiles, setProfiles] = useState([])
   const [user, setUser] = useState(defaultUser)
+  const [response, setResponse] = useState({})
 
   useEffect(() => {
     fetchData()
   }, [])
+
+  useEffect(() => {
+    clearTimeout(timeout.current)
+    timeout.current = setTimeout(() => {
+      if (response.success) {
+        setResponse({})
+        setShowForm(false)
+      }
+    }, 1000)
+  }, [response])
 
   const fetchData = async () => {
     const users = await getUsers()
@@ -44,15 +57,19 @@ const Users = () => {
     setShowForm(true)
   }
 
-  const save = async e => {
+  const save = e => {
     e.preventDefault()
-    await saveUser(user)
-    fetchData()
-    setShowForm(false)
+    saveUser(user)
+      .then(data => {
+        setResponse(data)
+        fetchData()
+      })
+      .catch(err => setResponse(err.response.data))
   }
 
   const cancel = e => {
     e.preventDefault()
+    setResponse({})
     setShowForm(false)
   }
 
@@ -67,9 +84,13 @@ const Users = () => {
     setShowForm(true)
   }
 
-  const deleteRecord = async user => {
-    await deleteUser(user)
-    fetchData()
+  const deleteRecord = user => {
+    deleteUser(user)
+      .then(data => {
+        setResponse(data)
+        fetchData()
+      })
+      .ctach(err => setResponse(err.response.data))
   }
 
   const { userName, email, fullName, profileId, companyId, statusId } = user
@@ -77,12 +98,15 @@ const Users = () => {
   return (
     <React.Fragment>
       {!showForm && <React.Fragment>
-        {users.length && <Table
+        <Table
           title="Users"
           records={users}
           editRecord={editRecord}
           deleteRecord={deleteRecord}
         />}
+
+        <Alert response={response} />
+
         <button className="btn btn-primary m-2" onClick={e => addRecord(e)}>Add User</button>
       </React.Fragment>}
       {showForm &&
@@ -106,6 +130,7 @@ const Users = () => {
           <div className="form-group">
             <label htmlFor="profileId">Profiles</label>
             <select className="form-control" id="profileId" value={profileId} onChange={e => updateForm(e)} >
+              <option></option>
               {profiles.map(st => <option key={st.id} value={st.id}>{st.name}</option>)}
             </select>
           </div>
@@ -113,6 +138,7 @@ const Users = () => {
           <div className="form-group">
             <label htmlFor="companyId">Companies</label>
             <select className="form-control" id="companyId" value={companyId} onChange={e => updateForm(e)} >
+              <option></option>
               {companies.map(st => <option key={st.id} value={st.id}>{st.name}</option>)}
             </select>
           </div>
@@ -120,9 +146,12 @@ const Users = () => {
           <div className="form-group">
             <label htmlFor="statusId">Status</label>
             <select className="form-control" id="statusId" value={statusId} onChange={e => updateForm(e)} >
+              <option></option>
               {status.map(st => <option key={st.id} value={st.id}>{st.name}</option>)}
             </select>
           </div>
+
+          <Alert response={response} />
 
         </Form>
       }

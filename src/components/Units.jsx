@@ -1,24 +1,37 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { getUnits, saveUnit, deleteUnit } from './../services/units'
 import { getCompanies } from './../services/companies'
 import Table from './common/Table'
 import Form from './common/Form'
+import Alert from './common/Alert'
 
 const Units = () => {
+  let timeout = useRef(0)
   const defaultUnit = {
     id: null,
     code: "",
     name: "",
-    companyId: 1,
+    companyId: null,
   }
   const [units, setUnits] = useState([])
   const [showForm, setShowForm] = useState(false)
   const [companies, setCompanies] = useState([])
   const [unit, setUnit] = useState(defaultUnit)
+  const [response, setResponse] = useState({})
 
   useEffect(() => {
     fetchData()
   }, [])
+
+  useEffect(() => {
+    clearTimeout(timeout.current)
+    timeout.current = setTimeout(() => {
+      if (response.success) {
+        setResponse({})
+        setShowForm(false)
+      }
+    }, 1000)
+  }, [response])
 
   const fetchData = async () => {
     const units = await getUnits()
@@ -33,15 +46,19 @@ const Units = () => {
     setShowForm(true)
   }
 
-  const save = async e => {
+  const save = e => {
     e.preventDefault()
-    await saveUnit(unit)
-    fetchData()
-    setShowForm(false)
+    saveUnit(unit)
+      .then(data => {
+        setResponse(data)
+        fetchData()
+      })
+      .catch(err => setResponse(err.response.data))
   }
 
   const cancel = e => {
     e.preventDefault()
+    setResponse({})
     setShowForm(false)
   }
 
@@ -56,9 +73,13 @@ const Units = () => {
     setShowForm(true)
   }
 
-  const deleteRecord = async unit => {
-    await deleteUnit(unit)
-    fetchData()
+  const deleteRecord = unit => {
+    deleteUnit(unit)
+      .then(data => {
+        setResponse(data)
+        fetchData()
+      })
+      .catch(err => setResponse(err.response.data))
   }
 
   const { code, name, companyId } = unit
@@ -66,12 +87,15 @@ const Units = () => {
   return (
     <React.Fragment>
       {!showForm && <React.Fragment>
-        {units.length && <Table
+        <Table
           title="Units"
           records={units}
           editRecord={editRecord}
           deleteRecord={deleteRecord}
         />}
+
+        <Alert response={response} />
+
         <button className="btn btn-primary m-2" onClick={e => addRecord(e)}>Add Unit</button>
       </React.Fragment>}
       {showForm &&
@@ -90,9 +114,12 @@ const Units = () => {
           <div className="form-group">
             <label htmlFor="companyId">Company</label>
             <select className="form-control" id="companyId" value={companyId} onChange={e => updateForm(e)} >
+              <option></option>
               {companies.map(st => <option key={st.id} value={st.id}>{st.name}</option>)}
             </select>
           </div>
+
+          <Alert response={response} />
 
         </Form>
       }
