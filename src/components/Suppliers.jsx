@@ -100,9 +100,9 @@ const Suppliers = () => {
           records={suppliers}
           editRecord={editRecord}
           deleteRecord={deleteRecord}
-        />}
+        />
 
-         <Alert response={response} />
+        <Alert response={response} />
 
         <button className="btn btn-primary m-2" onClick={e => addRecord(e)}>Add Supplier</button>
       </React.Fragment>}

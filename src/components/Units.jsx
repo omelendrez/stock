@@ -92,7 +92,7 @@ const Units = () => {
           records={units}
           editRecord={editRecord}
           deleteRecord={deleteRecord}
-        />}
+        />
 
         <Alert response={response} />
 

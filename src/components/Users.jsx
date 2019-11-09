@@ -103,7 +103,7 @@ const Users = () => {
           records={users}
           editRecord={editRecord}
           deleteRecord={deleteRecord}
-        />}
+        />
 
         <Alert response={response} />
 
