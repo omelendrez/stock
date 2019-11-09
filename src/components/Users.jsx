@@ -90,7 +90,7 @@ const Users = () => {
         setResponse(data)
         fetchData()
       })
-      .ctach(err => setResponse(err.response.data))
+      .catch(err => setResponse(err.response.data))
   }
 
   const { userName, email, fullName, profileId, companyId, statusId } = user
