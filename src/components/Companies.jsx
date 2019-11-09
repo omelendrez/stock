@@ -14,12 +14,14 @@ const Companies = () => {
     id: null,
     code: "",
     name: "",
-    statusId: 1,
+    /*TODO*/
+    statusId: null,
   }
   const [companies, setCompanies] = useState([])
   const [showForm, setShowForm] = useState(false)
   const [status, setStatus] = useState([])
   const [company, setCompany] = useState(defaultCompany)
+  // TODO
   const [response, setResponse] = useState({})
 
   useEffect(() => {
@@ -121,6 +123,8 @@ const Companies = () => {
           <div className="form-group">
             <label htmlFor="statusId">Status</label>
             <select className="form-control" id="statusId" value={statusId} onChange={e => updateForm(e)}>
+              {/*TODO*/}
+              <option></option>
               {status.map(st => <option key={st.id} value={st.id}>{st.name}</option>)}
             </select>
           </div>
