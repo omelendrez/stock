@@ -6,10 +6,10 @@ import Form from './common/Form'
 
 const Categories = () => {
   const defaultCategory = {
-    id: -1,
+    id: null,
     code: "",
     name: "",
-    companyId: 1,
+    companyId: "",
   }
 
   const [category, setCategory] = useState(defaultCategory)

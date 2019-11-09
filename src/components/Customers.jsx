@@ -7,7 +7,7 @@ import Form from './common/Form'
 
 const Customers = () => {
   const defaultCustomer = {
-    id: -1,
+    id: null,
     code: "",
     name: "",
     address: "",
@@ -15,8 +15,8 @@ const Customers = () => {
     email: "",
     contact: "",
     vat: 0,
-    companyId: 1,
-    statusId: 1
+    companyId: "",
+    statusId: ""
   }
 
   const [customer, setCustomer] = useState(defaultCustomer)

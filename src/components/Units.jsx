@@ -11,7 +11,7 @@ const Units = () => {
     id: null,
     code: "",
     name: "",
-    companyId: null,
+    companyId: "",
   }
   const [units, setUnits] = useState([])
   const [showForm, setShowForm] = useState(false)

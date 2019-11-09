@@ -12,8 +12,8 @@ const Stores = () => {
     id: null,
     code: "",
     name: "",
-    companyId: null,
-    statusId: null,
+    companyId: "",
+    statusId: "",
   }
   const [stores, setStores] = useState([])
   const [showForm, setShowForm] = useState(false)

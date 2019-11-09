@@ -15,7 +15,7 @@ const Companies = () => {
     code: "",
     name: "",
     /*TODO*/
-    statusId: null,
+    statusId: "",
   }
   const [companies, setCompanies] = useState([])
   const [showForm, setShowForm] = useState(false)

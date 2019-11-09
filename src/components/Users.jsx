@@ -14,9 +14,9 @@ const Users = () => {
     userName: "",
     email: "",
     fullName: "",
-    profileId: null,
-    companyId: null,
-    statusId: null,
+    profileId: "",
+    companyId: "",
+    statusId: "",
   }
   const [users, setUsers] = useState([])
   const [showForm, setShowForm] = useState(false)

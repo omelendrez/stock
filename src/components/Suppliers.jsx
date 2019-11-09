@@ -15,8 +15,8 @@ const Suppliers = () => {
     phoneNumber: "",
     address: "",
     contact: "",
-    companyId: null,
-    statusId: null,
+    companyId: "",
+    statusId: "",
   }
   const [suppliers, setSuppliers] = useState([])
   const [showForm, setShowForm] = useState(false)

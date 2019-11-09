@@ -12,12 +12,12 @@ const Products = () => {
     id: null,
     code: "",
     name: "",
-    categoryId: 1,
-    unitId: 1,
+    categoryId: "",
+    unitId: "",
     minimum: 0,
     price: 0,
-    companyId: 1,
-    statusId: 1
+    companyId: "",
+    statusId: ""
   }
 
   const [products, setProducts] = useState([])
