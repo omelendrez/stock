@@ -3,7 +3,7 @@ import React from 'react'
 const Alert = ({ response }) => {
   const { message, success, error } = response
   const style = `alert alert-${success ? 'success' : 'danger'} alert-dismissible fade show`
-  const responseMessage = success ? message : error
+  const responseMessage = message || error
   return (
     responseMessage ?
       (<div className={style} role="alert">
