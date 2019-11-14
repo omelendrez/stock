@@ -12,10 +12,15 @@ const Profiles = () => {
   const [profile, setProfile] = useState(defaultProfile)
   const [profiles, setProfiles] = useState([])
   const [showForm, setShowForm] = useState(false)
+  
   useEffect(() => {
-    const profiles = getProfiles()
-    setProfiles(profiles)
+    fetchData()
   }, [])
+
+  const fetchData = async () => {
+    const profiles = await getProfiles()
+    setProfiles(profiles)
+  }
 
   const addRecord = e => {
     e.preventDefault()
@@ -23,9 +28,10 @@ const Profiles = () => {
     setShowForm(true)
   }
 
-  const save = e => {
+  const save = async e => {
     e.preventDefault()
-    saveProfile(profile)
+    await saveProfile(profile)
+    fetchData()
     setShowForm(false)
   }
 
@@ -45,8 +51,9 @@ const Profiles = () => {
     setShowForm(true)
   }
 
-  const deleteRecord = profile => {
-    deleteProfile(profile)
+  const deleteRecord = async profile => {
+    await deleteProfile(profile)
+    fetchData()
   }
 
   const { code, name } = profile
