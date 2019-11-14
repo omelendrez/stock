@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { getCustomers, saveCustomer, deleteCustomer } from './../services/customers'
 import { getStatus } from './../services/status'
 import { getCompanies } from './../services/companies'
 import Table from './common/Table'
 import Form from './common/Form'
+import Alert from './common/Alert'
 
 const Customers = () => {
+  let timeout = useRef(0)
   const defaultCustomer = {
     id: null,
     code: "",
@@ -24,10 +26,21 @@ const Customers = () => {
   const [showForm, setShowForm] = useState(false)
   const [companies, setCompanies] = useState([])
   const [status, setStatus] = useState([])
+  const [response, setResponse] = useState({})
 
   useEffect(() => {
     fetchData()
   }, [])
+
+  useEffect(() => {
+    clearTimeout(timeout.current)
+    timeout.current = setTimeout(() => {
+      if (response.success) {
+        setResponse({})
+        setShowForm(false)
+      }
+    }, 1000)
+  }, [response])
 
   const fetchData = async () => {
     const status = await getStatus()
@@ -41,23 +54,29 @@ const Customers = () => {
   const addRecord = e => {
     e.preventDefault()
     setCustomer(defaultCustomer)
+    setResponse({})
     setShowForm(true)
   }
 
-  const save = async e => {
+  const save = e => {
     e.preventDefault()
-    await saveCustomer(customer)
-    fetchData()
-    setShowForm(false)
+    saveCustomer(customer)
+      .then(data => {
+        setResponse(data)
+        fetchData()
+      })
+      .catch(err => setResponse(err.response.data))
   }
 
   const cancel = e => {
     e.preventDefault()
+    setResponse({})
     setShowForm(false)
   }
 
   const editRecord = customer => {
     setCustomer(customer)
+    setResponse({})
     setShowForm(true)
   }
 
@@ -67,9 +86,13 @@ const Customers = () => {
     setCustomer(newCustomer)
   }
 
-  const deleteRecord = async customer => {
-    await deleteCustomer(customer)
-    fetchData()
+  const deleteRecord = customer => {
+    deleteCustomer(customer)
+      .then(data => {
+        setResponse(data)
+        fetchData()
+      })
+      .catch(err => setResponse(err.response.data))
   }
 
   const { code, name, address, phone, email, contact, vat, companyId, statusId } = customer
@@ -83,6 +106,8 @@ const Customers = () => {
           editRecord={editRecord}
           deleteRecord={deleteRecord}
         />}
+        <Alert response={response} />
+
         <button className="btn btn-primary m-2" onClick={e => addRecord(e)}>Add Customer</button>
       </React.Fragment>}
       {showForm &&
@@ -126,6 +151,7 @@ const Customers = () => {
           <div className="form-group">
             <label htmlFor="companyId">Company</label>
             <select className="form-control" id="companyId" value={companyId} onChange={e => updateForm(e)}>
+            <option></option>
               {companies.map(st => <option key={st.id} value={st.id}>{st.name}</option>)}
             </select>
           </div>
@@ -133,9 +159,12 @@ const Customers = () => {
           <div className="form-group">
             <label htmlFor="statusId">Status</label>
             <select className="form-control" id="statusId" value={statusId} onChange={e => updateForm(e)}>
+            <option></option>
               {status.map(st => <option key={st.id} value={st.id}>{st.name}</option>)}
             </select>
           </div>
+
+          <Alert response={response} />
 
         </Form>
       }
