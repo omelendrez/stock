@@ -1,34 +1,28 @@
-// TODO
 import React, { useState, useEffect, useRef } from 'react'
 import { getCompanies, saveCompany, deleteCompany } from './../services/companies'
 import { getStatus } from './../services/status'
 import Table from './common/Table'
 import Form from './common/Form'
-// TODO
 import Alert from './common/Alert'
 
 const Companies = () => {
-  // TODO
   let timeout = useRef(0)
   const defaultCompany = {
     id: null,
     code: "",
     name: "",
-    /*TODO*/
     statusId: ""
   }
   const [companies, setCompanies] = useState([])
   const [showForm, setShowForm] = useState(false)
   const [status, setStatus] = useState([])
   const [company, setCompany] = useState(defaultCompany)
-  // TODO
   const [response, setResponse] = useState({})
 
   useEffect(() => {
     fetchData()
   }, [])
 
-  // TODO
   useEffect(() => {
     clearTimeout(timeout.current)
     timeout.current = setTimeout(() => {
@@ -49,12 +43,10 @@ const Companies = () => {
   const addRecord = e => {
     e.preventDefault()
     setCompany(defaultCompany)
-    // TODO
     setResponse({})
     setShowForm(true)
   }
 
-  // TODO
   const save = e => {
     e.preventDefault()
     saveCompany(company)
@@ -67,7 +59,6 @@ const Companies = () => {
 
   const cancel = e => {
     e.preventDefault()
-    // TODO
     setResponse({})
     setShowForm(false)
   }
@@ -80,12 +71,10 @@ const Companies = () => {
 
   const editRecord = company => {
     setCompany(company)
-    // TODO
     setResponse({})
     setShowForm(true)
   }
 
-  // TODO
   const deleteRecord = company => {
     deleteCompany(company)
       .then(data => {
@@ -106,7 +95,6 @@ const Companies = () => {
           editRecord={editRecord}
           deleteRecord={deleteRecord}
         />
-        {/*TODO*/}
         <Alert response={response} />
 
         <button className="btn btn-primary m-2" onClick={e => addRecord(e)}>Add Company</button>
@@ -127,13 +115,11 @@ const Companies = () => {
           <div className="form-group">
             <label htmlFor="statusId">Status</label>
             <select className="form-control" id="statusId" value={statusId} onChange={e => updateForm(e)}>
-              {/*TODO*/}
               <option></option>
               {status.map(st => <option key={st.id} value={st.id}>{st.name}</option>)}
             </select>
           </div>
 
-          {/*TODO*/}
           <Alert response={response} />
 
         </Form>
