@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { getCustomers, saveCustomer, deleteCustomer } from './../services/customers'
-import { getCompanies } from './../services/companies'
 import { getStatus } from './../services/status'
+import { getCompanies } from './../services/companies'
 import Table from './common/Table'
 import Form from './common/Form'
 
@@ -26,13 +26,17 @@ const Customers = () => {
   const [status, setStatus] = useState([])
 
   useEffect(() => {
-    const customers = getCustomers()
-    setCustomers(customers)
-    const companies = getCompanies()
-    setCompanies(companies)
-    const status = getStatus()
-    setStatus(status)
+    fetchData()
   }, [])
+
+  const fetchData = async () => {
+    const status = await getStatus()
+    setStatus(status)
+    const customers = await getCustomers()
+    setCustomers(customers)
+    const companies = await getCompanies()
+    setCompanies(companies)
+  }
 
   const addRecord = e => {
     e.preventDefault()
@@ -40,9 +44,10 @@ const Customers = () => {
     setShowForm(true)
   }
 
-  const save = e => {
+  const save = async e => {
     e.preventDefault()
-    saveCustomer(customer)
+    await saveCustomer(customer)
+    fetchData()
     setShowForm(false)
   }
 
@@ -62,8 +67,9 @@ const Customers = () => {
     setCustomer(newCustomer)
   }
 
-  const deleteRecord = customer => {
-    deleteCustomer(customer)
+  const deleteRecord = async customer => {
+    await deleteCustomer(customer)
+    fetchData()
   }
 
   const { code, name, address, phone, email, contact, vat, companyId, statusId } = customer

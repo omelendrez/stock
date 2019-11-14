@@ -18,11 +18,15 @@ const Categories = () => {
   const [companies, setCompanies] = useState([])
 
   useEffect(() => {
-    const categories = getCategories()
-    setCategories(categories)
-    const companies = getCompanies()
-    setCompanies(companies)
+    fetchData()
   }, [])
+
+  const fetchData = async () => {
+    const companies = await getCompanies()
+    setCompanies(companies)
+    const categories = await getCategories()
+    setCategories(categories)
+  }
 
   const addRecord = e => {
     e.preventDefault()
@@ -30,9 +34,10 @@ const Categories = () => {
     setShowForm(true)
   }
 
-  const save = e => {
+  const save = async e => {
     e.preventDefault()
-    saveCategory(category)
+    await saveCategory(category)
+    fetchData()
     setShowForm(false)
   }
 
@@ -52,8 +57,9 @@ const Categories = () => {
     setShowForm(true)
   }
 
-  const deleteRecord = category => {
-    deleteCategory(category)
+  const deleteRecord = async category => {
+    await deleteCategory(category)
+    fetchData()
   }
 
   const { code, name, companyId } = category

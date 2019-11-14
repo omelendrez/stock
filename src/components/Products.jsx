@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { getProducts, saveProduct, deleteProduct } from './../services/products'
+import { getStatus } from './../services/status'
 import { getCategories } from './../services/categories'
 import { getCompanies } from './../services/companies'
 import { getUnits } from './../services/units'
-import { getStatus } from './../services/status'
 import Table from './common/Table'
 import Form from './common/Form'
 
@@ -29,17 +29,22 @@ const Products = () => {
   const [units, setUnits] = useState([])
 
   useEffect(() => {
-    const products = getProducts()
-    setProducts(products)
-    const status = getStatus()
-    setStatus(status)
-    const categories = getCategories()
-    setCategories(categories)
-    const companies = getCompanies()
-    setCompanies(companies)
-    const units = getUnits()
-    setUnits(units)
+    fetchData()
   }, [])
+
+  const fetchData = async () => {
+    const status = await getStatus()
+    setStatus(status)
+    const products = await getProducts()
+    setProducts(products)
+    const categories = await getCategories()
+    setCategories(categories)
+    const companies = await getCompanies()
+    setCompanies(companies)
+    const units = await getUnits()
+    setUnits(units)
+
+  }
 
   const addRecord = e => {
     e.preventDefault()
@@ -47,9 +52,10 @@ const Products = () => {
     setShowForm(true)
   }
 
-  const save = e => {
+  const save = async e => {
     e.preventDefault()
-    saveProduct(product)
+    await saveProduct(product)
+    fetchData()
     setShowForm(false)
   }
 
@@ -69,8 +75,9 @@ const Products = () => {
     setShowForm(false)
   }
 
-  const deleteRecord = product => {
-    deleteProduct(product)
+  const deleteRecord = async product => {
+    await deleteProduct(product)
+    fetchData()
   }
 
   const { code, name, categoryId, unitId, minimum, price, vat, companyId, statusId } = product
