@@ -15,7 +15,7 @@ const Companies = () => {
     code: "",
     name: "",
     /*TODO*/
-    statusId: "",
+    statusId: ""
   }
   const [companies, setCompanies] = useState([])
   const [showForm, setShowForm] = useState(false)
@@ -49,6 +49,8 @@ const Companies = () => {
   const addRecord = e => {
     e.preventDefault()
     setCompany(defaultCompany)
+    // TODO
+    setResponse({})
     setShowForm(true)
   }
 
@@ -78,6 +80,8 @@ const Companies = () => {
 
   const editRecord = company => {
     setCompany(company)
+    // TODO
+    setResponse({})
     setShowForm(true)
   }
 
