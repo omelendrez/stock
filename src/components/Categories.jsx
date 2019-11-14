@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { getCategories, saveCategory, deleteCategory } from './../services/categories'
 import { getCompanies } from './../services/companies'
 import Table from './common/Table'
 import Form from './common/Form'
+import Alert from './common/Alert'
 
 const Categories = () => {
+  let timeout = useRef(0)
   const defaultCategory = {
     id: null,
     code: "",
@@ -16,10 +18,21 @@ const Categories = () => {
   const [categories, setCategories] = useState([])
   const [showForm, setShowForm] = useState(false)
   const [companies, setCompanies] = useState([])
+  const [response, setResponse] = useState({})
 
   useEffect(() => {
     fetchData()
   }, [])
+
+  useEffect(() => {
+    clearTimeout(timeout.current)
+    timeout.current = setTimeout(() => {
+      if (response.success) {
+        setResponse({})
+        setShowForm(false)
+      }
+    }, 1000)
+  }, [response])
 
   const fetchData = async () => {
     const companies = await getCompanies()
@@ -31,18 +44,23 @@ const Categories = () => {
   const addRecord = e => {
     e.preventDefault()
     setCategory(defaultCategory)
+    setResponse({})
     setShowForm(true)
   }
 
-  const save = async e => {
+  const save = e => {
     e.preventDefault()
-    await saveCategory(category)
-    fetchData()
-    setShowForm(false)
+    saveCategory(category)
+      .then(data => {
+        setResponse(data)
+        fetchData()
+      })
+      .catch(err => setResponse(err.response.data))
   }
 
   const cancel = e => {
     e.preventDefault()
+    setResponse({})
     setShowForm(false)
   }
 
@@ -54,12 +72,17 @@ const Categories = () => {
 
   const editRecord = category => {
     setCategory(category)
+    setResponse({})
     setShowForm(true)
   }
 
-  const deleteRecord = async category => {
-    await deleteCategory(category)
-    fetchData()
+  const deleteRecord = category => {
+    deleteCategory(category)
+      .then(data => {
+        setResponse(data)
+        fetchData()
+      })
+      .catch(err => setResponse(err.response.data))
   }
 
   const { code, name, companyId } = category
@@ -73,6 +96,8 @@ const Categories = () => {
           editRecord={editRecord}
           deleteRecord={deleteRecord}
         />}
+        <Alert response={response} />
+
         <button className="btn btn-primary m-2" onClick={e => addRecord(e)}>Add Category</button>
       </React.Fragment>}
       {showForm &&
@@ -91,9 +116,12 @@ const Categories = () => {
           <div className="form-group">
             <label htmlFor="companyId">Company</label>
             <select className="form-control" id="companyId" value={companyId} onChange={e => updateForm(e)}>
+            <option></option>
               {companies.map(st => <option key={st.id} value={st.id}>{st.name}</option>)}
             </select>
           </div>
+
+          <Alert response={response} />
 
         </Form>
       }

@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { getProfiles, saveProfile, deleteProfile } from './../services/profiles'
 import Table from './common/Table'
 import Form from './common/Form'
+import Alert from './common/Alert'
 
 const Profiles = () => {
+  let timeout = useRef(0)
   const defaultProfile = {
     id: null,
     code: "",
@@ -12,10 +14,21 @@ const Profiles = () => {
   const [profile, setProfile] = useState(defaultProfile)
   const [profiles, setProfiles] = useState([])
   const [showForm, setShowForm] = useState(false)
+  const [response, setResponse] = useState({})
   
   useEffect(() => {
     fetchData()
   }, [])
+
+  useEffect(() => {
+    clearTimeout(timeout.current)
+    timeout.current = setTimeout(() => {
+      if (response.success) {
+        setResponse({})
+        setShowForm(false)
+      }
+    }, 1000)
+  }, [response])
 
   const fetchData = async () => {
     const profiles = await getProfiles()
@@ -25,18 +38,23 @@ const Profiles = () => {
   const addRecord = e => {
     e.preventDefault()
     setProfile(defaultProfile)
+    setResponse({})
     setShowForm(true)
   }
 
-  const save = async e => {
+  const save = e => {
     e.preventDefault()
-    await saveProfile(profile)
-    fetchData()
-    setShowForm(false)
+    saveProfile(profile)
+      .then(data => {
+        setResponse(data)
+        fetchData()
+      })
+      .catch(err => setResponse(err.response.data))
   }
 
   const cancel = e => {
     e.preventDefault()
+    setResponse({})
     setShowForm(false)
   }
 
@@ -48,12 +66,17 @@ const Profiles = () => {
 
   const editRecord = profile => {
     setProfile(profile)
+    setResponse({})
     setShowForm(true)
   }
 
-  const deleteRecord = async profile => {
-    await deleteProfile(profile)
-    fetchData()
+  const deleteRecord = profile => {
+    deleteProfile(profile)
+      .then(data => {
+        setResponse(data)
+        fetchData()
+      })
+      .catch(err => setResponse(err.response.data))
   }
 
   const { code, name } = profile
@@ -67,6 +90,8 @@ const Profiles = () => {
           editRecord={editRecord}
           deleteRecord={deleteRecord}
         />}
+        <Alert response={response} />
+
         <button className="btn btn-primary m-2" onClick={e => addRecord(e)}>Add Profile</button>
       </React.Fragment>}
       {showForm &&
@@ -81,6 +106,8 @@ const Profiles = () => {
             <label htmlFor="name">Name</label>
             <input type="text" id="name" className="form-control" value={name} onChange={e => updateForm(e)} />
           </div>
+
+          <Alert response={response} />
 
         </Form>
       }

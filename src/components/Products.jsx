@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { getProducts, saveProduct, deleteProduct } from './../services/products'
 import { getStatus } from './../services/status'
 import { getCategories } from './../services/categories'
@@ -6,8 +6,10 @@ import { getCompanies } from './../services/companies'
 import { getUnits } from './../services/units'
 import Table from './common/Table'
 import Form from './common/Form'
+import Alert from './common/Alert'
 
 const Products = () => {
+  let timeout = useRef(0)
   const defaultProduct = {
     id: null,
     code: "",
@@ -27,10 +29,21 @@ const Products = () => {
   const [categories, setCategories] = useState([])
   const [companies, setCompanies] = useState([])
   const [units, setUnits] = useState([])
+  const [response, setResponse] = useState({})
 
   useEffect(() => {
     fetchData()
   }, [])
+
+  useEffect(() => {
+    clearTimeout(timeout.current)
+    timeout.current = setTimeout(() => {
+      if (response.success) {
+        setResponse({})
+        setShowForm(false)
+      }
+    }, 1000)
+  }, [response])
 
   const fetchData = async () => {
     const status = await getStatus()
@@ -49,18 +62,23 @@ const Products = () => {
   const addRecord = e => {
     e.preventDefault()
     setProduct(defaultProduct)
+    setResponse({})
     setShowForm(true)
   }
 
-  const save = async e => {
+  const save = e => {
     e.preventDefault()
-    await saveProduct(product)
-    fetchData()
-    setShowForm(false)
+    saveProduct(product)
+      .then(data => {
+        setResponse(data)
+        fetchData()
+      })
+      .catch(err => setResponse(err.response.data))
   }
 
   const editRecord = product => {
     setProduct(product)
+    setResponse({})
     setShowForm(true)
   }
 
@@ -72,12 +90,17 @@ const Products = () => {
 
   const cancel = e => {
     e.preventDefault()
+    setResponse({})
     setShowForm(false)
   }
 
-  const deleteRecord = async product => {
-    await deleteProduct(product)
-    fetchData()
+  const deleteRecord = product => {
+    deleteProduct(product)
+      .then(data => {
+        setResponse(data)
+        fetchData()
+      })
+      .catch(err => setResponse(err.response.data))
   }
 
   const { code, name, categoryId, unitId, minimum, price, vat, companyId, statusId } = product
@@ -91,6 +114,8 @@ const Products = () => {
           editRecord={editRecord}
           deleteRecord={deleteRecord}
         />}
+          <Alert response={response} />
+
         <button className="btn btn-primary m-2" onClick={e => addRecord(e)}>Add Product</button>
       </React.Fragment>}
       {showForm &&
@@ -109,6 +134,7 @@ const Products = () => {
           <div className="form-group">
             <label htmlFor="categoryId">Category</label>
             <select className="form-control" id="categoryId" value={categoryId} onChange={e => updateForm(e)}>
+            <option></option>
               {categories.map(st => <option key={st.id} value={st.id}>{st.name}</option>)}
             </select>
           </div>
@@ -116,6 +142,7 @@ const Products = () => {
           <div className="form-group">
             <label htmlFor="unitId">Unit</label>
             <select className="form-control" id="unitId" value={unitId} onChange={e => updateForm(e)}>
+            <option></option>
               {units.map(st => <option key={st.id} value={st.id}>{st.name}</option>)}
             </select>
           </div>
@@ -138,6 +165,7 @@ const Products = () => {
           <div className="form-group">
             <label htmlFor="companyId">Company</label>
             <select className="form-control" id="companyId" value={companyId} onChange={e => updateForm(e)}>
+            <option></option>
               {companies.map(st => <option key={st.id} value={st.id}>{st.name}</option>)}
             </select>
           </div>
@@ -145,9 +173,12 @@ const Products = () => {
           <div className="form-group">
             <label htmlFor="statusId">Status</label>
             <select className="form-control" id="statusId" value={statusId} onChange={e => updateForm(e)}>
+            <option></option>
               {status.map(st => <option key={st.id} value={st.id}>{st.name}</option>)}
             </select>
           </div>
+
+          <Alert response={response} />
 
         </Form>
       }
