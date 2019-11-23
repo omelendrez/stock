@@ -1,3 +1,12 @@
 {
-  "users": "Users"
+  "users": "Users",
+  "companies": "Companies",
+  "add company": "Add Company",
+  "save": "Save",
+  "cancel": "Cancel",
+  "code": "Code",
+  "edit": "Edit",
+  "delete": "Delete",
+  "name": "Name",
+  "status": "Status"
 }

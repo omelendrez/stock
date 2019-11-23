@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import Header from './Header'
 import { hiddenTableFields } from '../../helpers'
+import { config } from './../../config'
+import { t } from './../../int'
+const { language } = config
+
+const editText = t(language, "edit")
+const deleteText = t(language, "delete")
+const deleteRecordText = t(language, "delete record") + ' ?'
 
 const Table = ({ title, records, editRecord, deleteRecord }) => {
   const pagination = {
@@ -58,8 +65,8 @@ const Row = ({ record }) => Object.keys(record).map((field, index) => hiddenTabl
 
 const Buttons = ({ record, editRecord, deleteRecord }) => (
   <td>
-    <button className="btn btn-sm btn-danger mr-3" onClick={() => window.confirm('Delete record?') && deleteRecord(record)}>Delete</button>
-    <button className="btn btn-sm btn-primary" onClick={() => editRecord(record)}>Edit</button>
+    <button className="btn btn-sm btn-danger mr-3" onClick={() => window.confirm(deleteRecordText) && deleteRecord(record)}>{deleteText}</button>
+    <button className="btn btn-sm btn-primary" onClick={() => editRecord(record)}>{editText}</button>
   </td>
 )
 const Pagination = ({ pageState, records, setPage }) => {

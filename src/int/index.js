@@ -1,4 +1,4 @@
 export const t = (lang, text) => {
   const language = require('./' + lang + '.json')
-  return language[text]
+  return language[text] || `-${text}-`
 }
