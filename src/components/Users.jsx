@@ -6,6 +6,9 @@ import { getProfiles } from './../services/profiles'
 import Table from './common/Table'
 import Form from './common/Form'
 import Alert from './common/Alert'
+import { config } from './../config'
+import { t } from './../int'
+const { language } = config
 
 const Users = () => {
   let timeout = useRef(0)
@@ -99,7 +102,7 @@ const Users = () => {
     <React.Fragment>
       {!showForm && <React.Fragment>
         <Table
-          title="Users"
+          title={t(language, "users")}
           records={users}
           editRecord={editRecord}
           deleteRecord={deleteRecord}
@@ -107,28 +110,28 @@ const Users = () => {
 
         <Alert response={response} />
 
-        <button className="btn btn-primary m-2" onClick={e => addRecord(e)}>Add User</button>
+        <button className="btn btn-primary m-2" onClick={e => addRecord(e)}>{t(language, "add user")}</button>
       </React.Fragment>}
       {showForm &&
-        <Form title="Users" save={save} cancel={cancel}>
+        <Form title={t(language, "users")} save={save} cancel={cancel}>
 
           <div className="form-group">
-            <label htmlFor="userName">User Name</label>
+            <label htmlFor="userName">{t(language, "userName")}</label>
             <input type="text" id="userName" className="form-control" value={userName} onChange={e => updateForm(e)} />
           </div>
 
           <div className="form-group">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">{t(language, "email")}</label>
             <input type="text" id="email" className="form-control" value={email} onChange={e => updateForm(e)} />
           </div>
 
           <div className="form-group">
-            <label htmlFor="fullName">Full Name</label>
+            <label htmlFor="fullName">{t(language, "fullName")}</label>
             <input type="text" id="fullName" className="form-control" value={fullName} onChange={e => updateForm(e)} />
           </div>
 
           <div className="form-group">
-            <label htmlFor="profileId">Profiles</label>
+            <label htmlFor="profileId">{t(language, "profile")} </label>
             <select className="form-control" id="profileId" value={profileId} onChange={e => updateForm(e)} >
               <option></option>
               {profiles.map(st => <option key={st.id} value={st.id}>{st.name}</option>)}
@@ -136,7 +139,7 @@ const Users = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="companyId">Companies</label>
+            <label htmlFor="companyId">{t(language, "company")} </label>
             <select className="form-control" id="companyId" value={companyId} onChange={e => updateForm(e)} >
               <option></option>
               {companies.map(st => <option key={st.id} value={st.id}>{st.name}</option>)}
@@ -144,7 +147,7 @@ const Users = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="statusId">Status</label>
+            <label htmlFor="statusId">{t(language, "status")} </label>
             <select className="form-control" id="statusId" value={statusId} onChange={e => updateForm(e)} >
               <option></option>
               {status.map(st => <option key={st.id} value={st.id}>{st.name}</option>)}
