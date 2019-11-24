@@ -7,6 +7,9 @@ import { getUnits } from './../services/units'
 import Table from './common/Table'
 import Form from './common/Form'
 import Alert from './common/Alert'
+import { config } from './../config'
+import { t } from './../int'
+const { language } = config
 
 const Products = () => {
   let timeout = useRef(0)
@@ -109,7 +112,7 @@ const Products = () => {
     <React.Fragment>
       {!showForm && <React.Fragment>
         {products.length && <Table
-          title="Products"
+          title={t(language, "products")}
           records={products}
           editRecord={editRecord}
           deleteRecord={deleteRecord}
@@ -119,20 +122,20 @@ const Products = () => {
         <button className="btn btn-primary m-2" onClick={e => addRecord(e)}>Add Product</button>
       </React.Fragment>}
       {showForm &&
-        <Form title="Products" save={save} cancel={cancel}>
+        <Form title={t(language, "products")} save={save} cancel={cancel}>
 
           <div className="form-group">
-            <label htmlFor="code">Code</label>
+            <label htmlFor="code">{t(language, "code")}</label>
             <input type="text" id="code" className="form-control" value={code} onChange={e => updateForm(e)} />
           </div>
 
           <div className="form-group">
-            <label htmlFor="name">Name</label>
+            <label htmlFor="name">{t(language, "name")}</label>
             <input type="text" id="name" className="form-control" value={name} onChange={e => updateForm(e)} />
           </div>
 
           <div className="form-group">
-            <label htmlFor="categoryId">Category</label>
+            <label htmlFor="categoryId">{t(language, "category")}</label>
             <select className="form-control" id="categoryId" value={categoryId} onChange={e => updateForm(e)}>
             <option></option>
               {categories.map(st => <option key={st.id} value={st.id}>{st.name}</option>)}
@@ -140,7 +143,7 @@ const Products = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="unitId">Unit</label>
+            <label htmlFor="unitId">{t(language, "unit")}</label>
             <select className="form-control" id="unitId" value={unitId} onChange={e => updateForm(e)}>
             <option></option>
               {units.map(st => <option key={st.id} value={st.id}>{st.name}</option>)}
@@ -148,22 +151,22 @@ const Products = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="minimum">Minimum</label>
+            <label htmlFor="minimum">{t(language, "minimum")}</label>
             <input type="number" id="minimum" className="form-control" value={minimum} onChange={e => updateForm(e)} />
           </div>
 
           <div className="form-group">
-            <label htmlFor="vat">V.A.T.</label>
+            <label htmlFor="vat">{t(language, "vat")}</label>
             <input type="number" id="vat" className="form-control" value={vat} onChange={e => updateForm(e)} />
           </div>
 
           <div className="form-group">
-            <label htmlFor="price">Price</label>
+            <label htmlFor="price">{t(language, "price")}</label>
             <input type="number" id="price" className="form-control" value={price} onChange={e => updateForm(e)} />
           </div>
 
           <div className="form-group">
-            <label htmlFor="companyId">Company</label>
+            <label htmlFor="companyId">{t(language, "company")}</label>
             <select className="form-control" id="companyId" value={companyId} onChange={e => updateForm(e)}>
             <option></option>
               {companies.map(st => <option key={st.id} value={st.id}>{st.name}</option>)}
@@ -171,7 +174,7 @@ const Products = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="statusId">Status</label>
+            <label htmlFor="statusId">{t(language, "status")}</label>
             <select className="form-control" id="statusId" value={statusId} onChange={e => updateForm(e)}>
             <option></option>
               {status.map(st => <option key={st.id} value={st.id}>{st.name}</option>)}

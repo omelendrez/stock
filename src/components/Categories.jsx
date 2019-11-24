@@ -4,6 +4,9 @@ import { getCompanies } from './../services/companies'
 import Table from './common/Table'
 import Form from './common/Form'
 import Alert from './common/Alert'
+import { config } from './../config'
+import { t } from './../int'
+const { language } = config
 
 const Categories = () => {
   let timeout = useRef(0)
@@ -91,7 +94,7 @@ const Categories = () => {
     <React.Fragment>
       {!showForm && <React.Fragment>
         {categories.length && <Table
-          title="Categories"
+          title={t(language, "categories")}
           records={categories}
           editRecord={editRecord}
           deleteRecord={deleteRecord}
@@ -101,20 +104,20 @@ const Categories = () => {
         <button className="btn btn-primary m-2" onClick={e => addRecord(e)}>Add Category</button>
       </React.Fragment>}
       {showForm &&
-        <Form title="Categories" save={save} cancel={cancel}>
+        <Form title={t(language, "categories")} save={save} cancel={cancel}>
 
           <div className="form-group">
-            <label htmlFor="code">Code</label>
+            <label htmlFor="code">{t(language, "code")}</label>
             <input type="text" id="code" className="form-control" value={code} onChange={e => updateForm(e)} />
           </div>
 
           <div className="form-group">
-            <label htmlFor="name">Name</label>
+            <label htmlFor="name">{t(language, "name")}</label>
             <input type="text" id="name" className="form-control" value={name} onChange={e => updateForm(e)} />
           </div>
 
           <div className="form-group">
-            <label htmlFor="companyId">Company</label>
+            <label htmlFor="companyId">{t(language, "company")}</label>
             <select className="form-control" id="companyId" value={companyId} onChange={e => updateForm(e)}>
             <option></option>
               {companies.map(st => <option key={st.id} value={st.id}>{st.name}</option>)}
