@@ -4,7 +4,6 @@ import { getStatus } from './../services/status'
 import Table from './common/Table'
 import Form from './common/Form'
 import Alert from './common/Alert'
-// TODO
 import { config } from './../config'
 import { t } from './../int'
 const { language } = config
@@ -93,7 +92,6 @@ const Companies = () => {
   return (
     <React.Fragment>
       {!showForm && <React.Fragment>
-        {/*TODO*/}
         <Table
           title={t(language, "companies")}
           records={companies}
@@ -101,26 +99,22 @@ const Companies = () => {
           deleteRecord={deleteRecord}
         />
         <Alert response={response} />
-        {/*TODO*/}
         <button className="btn btn-primary m-2" onClick={e => addRecord(e)}>{t(language, "add company")}</button>
       </React.Fragment>}
       {showForm &&
         <Form title={t(language, "companies")} save={save} cancel={cancel}>
 
           <div className="form-group">
-            {/*TODO*/}
             <label htmlFor="code">{t(language, "code")}</label>
             <input type="text" id="code" className="form-control" value={code} onChange={e => updateForm(e)} />
           </div>
 
           <div className="form-group">
-            {/*TODO*/}
             <label htmlFor="name">{t(language, "name")}</label>
             <input type="text" id="name" className="form-control" value={name} onChange={e => updateForm(e)} />
           </div>
 
           <div className="form-group">
-            {/*TODO*/}
             <label htmlFor="statusId">{t(language, "status")}</label>
             <select className="form-control" id="statusId" value={statusId} onChange={e => updateForm(e)}>
               <option></option>
