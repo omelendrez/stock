@@ -101,7 +101,7 @@ const Categories = () => {
         />}
         <Alert response={response} />
 
-        <button className="btn btn-primary m-2" onClick={e => addRecord(e)}>Add Category</button>
+        <button className="btn btn-primary m-2" onClick={e => addRecord(e)}>{t(language, "add category")}</button>
       </React.Fragment>}
       {showForm &&
         <Form title={t(language, "categories")} save={save} cancel={cancel}>
@@ -119,7 +119,7 @@ const Categories = () => {
           <div className="form-group">
             <label htmlFor="companyId">{t(language, "company")}</label>
             <select className="form-control" id="companyId" value={companyId} onChange={e => updateForm(e)}>
-            <option></option>
+              <option></option>
               {companies.map(st => <option key={st.id} value={st.id}>{st.name}</option>)}
             </select>
           </div>

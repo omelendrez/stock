@@ -18,7 +18,7 @@ const Profiles = () => {
   const [profiles, setProfiles] = useState([])
   const [showForm, setShowForm] = useState(false)
   const [response, setResponse] = useState({})
-  
+
   useEffect(() => {
     fetchData()
   }, [])
@@ -95,7 +95,7 @@ const Profiles = () => {
         />}
         <Alert response={response} />
 
-        <button className="btn btn-primary m-2" onClick={e => addRecord(e)}>Add Profile</button>
+        <button className="btn btn-primary m-2" onClick={e => addRecord(e)}>{t(language, "add profile")}</button>
       </React.Fragment>}
       {showForm &&
         <Form title={t(language, "profiles")} save={save} cancel={cancel}>

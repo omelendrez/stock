@@ -117,9 +117,9 @@ const Products = () => {
           editRecord={editRecord}
           deleteRecord={deleteRecord}
         />}
-          <Alert response={response} />
+        <Alert response={response} />
 
-        <button className="btn btn-primary m-2" onClick={e => addRecord(e)}>Add Product</button>
+        <button className="btn btn-primary m-2" onClick={e => addRecord(e)}>{t(language, "add product")}</button>
       </React.Fragment>}
       {showForm &&
         <Form title={t(language, "products")} save={save} cancel={cancel}>
@@ -137,7 +137,7 @@ const Products = () => {
           <div className="form-group">
             <label htmlFor="categoryId">{t(language, "category")}</label>
             <select className="form-control" id="categoryId" value={categoryId} onChange={e => updateForm(e)}>
-            <option></option>
+              <option></option>
               {categories.map(st => <option key={st.id} value={st.id}>{st.name}</option>)}
             </select>
           </div>
@@ -145,7 +145,7 @@ const Products = () => {
           <div className="form-group">
             <label htmlFor="unitId">{t(language, "unit")}</label>
             <select className="form-control" id="unitId" value={unitId} onChange={e => updateForm(e)}>
-            <option></option>
+              <option></option>
               {units.map(st => <option key={st.id} value={st.id}>{st.name}</option>)}
             </select>
           </div>
@@ -168,7 +168,7 @@ const Products = () => {
           <div className="form-group">
             <label htmlFor="companyId">{t(language, "company")}</label>
             <select className="form-control" id="companyId" value={companyId} onChange={e => updateForm(e)}>
-            <option></option>
+              <option></option>
               {companies.map(st => <option key={st.id} value={st.id}>{st.name}</option>)}
             </select>
           </div>
@@ -176,7 +176,7 @@ const Products = () => {
           <div className="form-group">
             <label htmlFor="statusId">{t(language, "status")}</label>
             <select className="form-control" id="statusId" value={statusId} onChange={e => updateForm(e)}>
-            <option></option>
+              <option></option>
               {status.map(st => <option key={st.id} value={st.id}>{st.name}</option>)}
             </select>
           </div>
