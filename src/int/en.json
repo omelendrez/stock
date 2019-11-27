@@ -26,5 +26,14 @@
   "email": "Email",
   "userName": "User Name",
   "fullName": "Full Name",
-  "profile": "Profile"
+  "profile": "Profile",
+  "products": "Products",
+  "category": "Category",
+  "minimum": "Minimum",
+  "price": "Price",
+  "profiles": "Profiles",
+  "vat": "V.a.t",
+  "categories": "Categories",
+  "customers": "Customers",
+  "phone": "Phone"
 }

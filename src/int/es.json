@@ -25,5 +25,14 @@
   "status": "Estado",
   "email": "Email",
   "profile": "Perfil",
-  "fullName": "Nombre Completo"
+  "fullName": "Nombre Completo",
+  "categories": "Categorias",
+  "customers": "Clientes",
+  "phone": "Telefono",
+  "vat": "V.a.t",
+  "products": "Productos",
+  "category": "Categoria",
+  "minimum": "Minimo",
+  "price": "Precio",
+  "profiles": "Perfiles"
 }

@@ -3,6 +3,9 @@ import { getProfiles, saveProfile, deleteProfile } from './../services/profiles'
 import Table from './common/Table'
 import Form from './common/Form'
 import Alert from './common/Alert'
+import { config } from './../config'
+import { t } from './../int'
+const { language } = config
 
 const Profiles = () => {
   let timeout = useRef(0)
@@ -85,7 +88,7 @@ const Profiles = () => {
     <React.Fragment>
       {!showForm && <React.Fragment>
         {profiles.length && <Table
-          title="Profiles"
+          title={t(language, "profiles")}
           records={profiles}
           editRecord={editRecord}
           deleteRecord={deleteRecord}
@@ -95,15 +98,15 @@ const Profiles = () => {
         <button className="btn btn-primary m-2" onClick={e => addRecord(e)}>Add Profile</button>
       </React.Fragment>}
       {showForm &&
-        <Form title="Profiles" save={save} cancel={cancel}>
+        <Form title={t(language, "profiles")} save={save} cancel={cancel}>
 
           <div className="form-group">
-            <label htmlFor="code">Code</label>
+            <label htmlFor="code">{t(language, "code")}</label>
             <input type="text" id="code" className="form-control" value={code} onChange={e => updateForm(e)} />
           </div>
 
           <div className="form-group">
-            <label htmlFor="name">Name</label>
+            <label htmlFor="name">{t(language, "name")}</label>
             <input type="text" id="name" className="form-control" value={name} onChange={e => updateForm(e)} />
           </div>
 
