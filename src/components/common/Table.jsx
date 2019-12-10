@@ -57,7 +57,7 @@ const Table = ({ title, records, editRecord, deleteRecord }) => {
 }
 
 
-const Headers = ({ record }) => Object.keys(record).map((field, index) => hiddenTableFields.indexOf(field) !== -1 ? null : <th className="text-uppercase small" key={index}>{field.replace(/_/g, ' ')}</th>)
+const Headers = ({ record }) => Object.keys(record).map((field, index) => hiddenTableFields.indexOf(field) !== -1 ? null : <th className="text-uppercase small" key={index}>{t(language, field)}</th>)
 
 const Body = ({ records, editRecord, deleteRecord }) => records.map((record, index) => (<tr key={index}><Row record={record} /><Buttons record={record} editRecord={editRecord} deleteRecord={deleteRecord} /></tr>))
 

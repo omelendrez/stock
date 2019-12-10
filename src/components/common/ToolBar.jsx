@@ -1,5 +1,47 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import { config } from './../../config'
+import { t } from './../../int'
+const { language } = config
+
+const menuOptions = [
+  {
+    title: 'companies',
+    url: '/companies'
+  },
+  {
+    title: 'categories',
+    url: '/categories'
+  },
+  {
+    title: 'customers',
+    url: '/customers'
+  },
+  {
+    title: 'products',
+    url: '/products'
+  },
+  {
+    title: 'profiles',
+    url: '/profiles'
+  },
+  {
+    title: 'stores',
+    url: '/stores'
+  },
+  {
+    title: 'suppliers',
+    url: '/suppliers'
+  },
+  {
+    title: 'units',
+    url: '/units'
+  },
+  {
+    title: 'users',
+    url: '/users'
+  }
+]
 
 const ToolBar = props => (
   <header>
@@ -13,33 +55,14 @@ const ToolBar = props => (
           <li className="nav-item active">
             <NavLink className="nav-link" to="/">Home <span className="sr-only">(current)</span></NavLink>
           </li>
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/companies">Companies</NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/categories">Categories</NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/customers">Customers</NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/products">Products</NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/profiles">Profiles</NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/stores">Stores</NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/suppliers">Suppliers</NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/units">Units</NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/users">Users</NavLink>
-          </li>
+          {
+            menuOptions.map(option => {
+              return (<li className="nav-item">
+                <NavLink className="nav-link" to={option.url}>{t(language, option.title)}</NavLink>
+              </li>
+              )
+            })
+          }
         </ul>
       </div>
     </nav>
