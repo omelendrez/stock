@@ -2,46 +2,8 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { config } from './../../config'
 import { t } from './../../int'
+import { menuOptions } from './../../utils'
 const { language } = config
-
-const menuOptions = [
-  {
-    title: 'companies',
-    url: '/companies'
-  },
-  {
-    title: 'categories',
-    url: '/categories'
-  },
-  {
-    title: 'customers',
-    url: '/customers'
-  },
-  {
-    title: 'products',
-    url: '/products'
-  },
-  {
-    title: 'profiles',
-    url: '/profiles'
-  },
-  {
-    title: 'stores',
-    url: '/stores'
-  },
-  {
-    title: 'suppliers',
-    url: '/suppliers'
-  },
-  {
-    title: 'units',
-    url: '/units'
-  },
-  {
-    title: 'users',
-    url: '/users'
-  }
-]
 
 const ToolBar = props => (
   <header>
