@@ -18,12 +18,11 @@ const ToolBar = props => (
             <NavLink className="nav-link" to="/">Home <span className="sr-only">(current)</span></NavLink>
           </li>
           {
-            menuOptions.map(option => {
-              return (<li className="nav-item">
+            menuOptions.map(option => (
+              <li className="nav-item">
                 <NavLink className="nav-link" to={option.url}>{t(language, option.title)}</NavLink>
               </li>
-              )
-            })
+            ))
           }
         </ul>
       </div>
