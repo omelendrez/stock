@@ -18,8 +18,8 @@ const ToolBar = props => (
           </li>
           {
             menuOptions.map(option => (
-              <li className="nav-item">
-                <NavLink className="nav-link" to={option.url}>{t(language, option.title)}</NavLink>
+              <li className="nav-item" key={option.title}>
+                <NavLink className="nav-link small" to={option.url}>{t(language, option.title)}</NavLink>
               </li>
             ))
           }
