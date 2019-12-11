@@ -37,7 +37,15 @@ export const menuOptions = [
   },
   {
     title: 'reports',
-    url: '/reports'
+    url: '/reports',
+  },
+  {
+    title: 'stock',
+    url: '/stock'
+  },
+  {
+    title: 'orders',
+    url: '/orders'
   },
   {
     title: 'users',
