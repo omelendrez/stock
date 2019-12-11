@@ -32,6 +32,14 @@ export const menuOptions = [
     url: '/units'
   },
   {
+    title: 'sales',
+    url: '/sales'
+  },
+  {
+    title: 'reports',
+    url: '/reports',
+  },
+  {
     title: 'stock',
     url: '/stock'
   },
