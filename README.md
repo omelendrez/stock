@@ -1,68 +1,43 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Stock
+## Sistema de stock
 
-## Available Scripts
 
-In the project directory, you can run:
+1) Abrir vscode y cambiar a la branch develop:
 
-### `npm start`
+```git checkout develop```
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+2) Bajar los últimos cambios de esa branch:
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+```git pull```
 
-### `npm test`
+3) Crear una branch nueva para el issue con el que hay que trabajar.
+Por ejemplo si el issue es el numero 15, hacer:
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```git checkout -b feature_XX```
 
-### `npm run build`
+(donde XX es el número de issue, por ejemplo feature_15 para este ejemplo)
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+4) Una vez terminado el código y luego de probarlo y que ande bien, hacer:
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+```git status```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+5) Se habrán listado en color rojo los archivos que hemos modificado, entonces hacer:
 
-### `npm run eject`
+```git add .```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+6) Con eso hemos agregado los archivos para ser "pusheados" al repo de github.
+Ahora verificamos que los archivos fueron agregados (deberán estar en color verde)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```git status```
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+7) Ahora vamos a "commitear" esos cambios con el siguiente comando:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```git commit -m "Descripcion de lo que hemos hecho"```
 
-## Learn More
+8) Ya podemos subir los cambios al repo con:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```git push origin feature_XX```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+(donde XX es el número de issue por ejemplo feature_15 para este ejemplo)
 
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+9) Ir a la página de github y crear el PR y ponerme a mí como reviewer.

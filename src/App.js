@@ -1,24 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import ToolBar from './components/common/ToolBar';
+import Home from './components/Home'
+import Companies from './components/Companies'
+import Categories from './components/Categories'
+import Customers from './components/Customers'
+import Products from './components/Products'
+import Profiles from './components/Profiles'
+import Stores from './components/Stores'
+import Suppliers from './components/Suppliers'
+import Units from './components/Units'
+import Users from './components/Users'
+import './App.css'
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <ToolBar />
+        <Route exact path="/" component={Home} />
+        <Route path="/companies" component={Companies} />
+        <Route path="/categories" component={Categories} />
+        <Route path="/customers" component={Customers} />
+        <Route path="/products" component={Products} />
+        <Route path="/profiles" component={Profiles} />
+        <Route path="/stores" component={Stores} />
+        <Route path="/suppliers" component={Suppliers} />
+        <Route path="/units" component={Units} />
+        <Route path="/users" component={Users} />
+      </Router>
     </div>
   );
 }
